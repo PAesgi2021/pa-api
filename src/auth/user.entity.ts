@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Task } from '../tasks/task.entity';
+import { Task } from '../api/ergon/tasks/task.entity';
 
 @Entity()
 @Unique(['email'])
