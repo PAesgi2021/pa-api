@@ -6,9 +6,6 @@ import {TodolistModule} from './api/ergon/todolist/todolist.module';
 import {TestController} from './api/ergon/test/test.controller';
 import {Task} from "./api/ergon/tasks/task.entity";
 import {User} from "./auth/user.entity";
-import { FooModule } from './foo/foo.module';
-import { FooModule } from './api/ergob/foo/foo.module';
-import { FooModule } from './api/ergon/foo/foo.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
