@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "../../../Desktop/nestjs-API/dist",
+    "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true
   }

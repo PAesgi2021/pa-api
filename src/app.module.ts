@@ -6,6 +6,8 @@ import {TodolistModule} from './api/ergon/todolist/todolist.module';
 import {TestController} from './api/ergon/test/test.controller';
 import {Task} from "./api/ergon/tasks/task.entity";
 import {User} from "./auth/user.entity";
+import { YtPostModule } from './api/yourturn/yt-post/yt-post.module';
+import { YtPost } from './api/yourturn/yt-post/entities/yt-post.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -14,7 +16,7 @@ import {User} from "./auth/user.entity";
     port: 5432,
     username: 'postgres',
     password: 'postgres',
-    database: 'pgJava',
+    database: 'pa-java',
     entities: [Task, User],
     synchronize: true,
   }),
@@ -24,11 +26,11 @@ import {User} from "./auth/user.entity";
     port: 5432,
     username: 'postgres',
     password: 'postgres',
-    database: 'pgAngular',
-    entities: [Task, User],
+    database: 'pa-angular',
+    entities: [YtPost],
     synchronize: true,
   }),
-    TasksModule, AuthModule, TodolistModule],
+    TasksModule, AuthModule, TodolistModule, YtPostModule],
   controllers: [TestController],
 })
 export class AppModule {}
