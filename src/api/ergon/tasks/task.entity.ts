@@ -1,9 +1,11 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { TaskStatus } from './enum/task-status.enum';
 import { User } from '../../../auth/user.entity';
+import {ErUser} from "../er-user/entities/er-user.entity";
+import {ErTodolist} from "../er-todolist/entities/er-todolist.entity";
 
 @Entity()
-export class Task extends BaseEntity {
+export class ErTask extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,8 +18,11 @@ export class Task extends BaseEntity {
   @Column()
   status: TaskStatus;
 
-  @ManyToOne(type => User, user => user.tasks, { eager: false })
-  user: User;
+  @ManyToOne(type => ErUser, erUser => erUser.task, { eager: false })
+  user: ErUser;
+
+  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.task, { eager: false })
+  todolist: ErTodolist;
 
   @Column()
   userId: number;

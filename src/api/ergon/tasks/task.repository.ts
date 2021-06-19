@@ -1,20 +1,20 @@
-import { EntityRepository, Repository } from 'typeorm';
-import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { Task } from './task.entity';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { TaskStatus } from './enum/task-status.enum';
-import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { User } from '../../../auth/user.entity';
+import {EntityRepository, Repository} from 'typeorm';
+import {InternalServerErrorException, Logger} from '@nestjs/common';
+import {ErTask} from './task.entity';
+import {CreateTaskDto} from './dto/create-task.dto';
+import {TaskStatus} from './enum/task-status.enum';
+import {GetTasksFilterDto} from './dto/get-tasks-filter.dto';
+import {ErUser} from "../er-user/entities/er-user.entity";
 
-@EntityRepository(Task)
-export class TaskRepository extends Repository<Task> {
+@EntityRepository(ErTask)
+export class TaskRepository extends Repository<ErTask> {
   private logger = new Logger('TaskRepository');
 
-  async getTasks(filterDto: GetTasksFilterDto, user: User): Promise<Task[]> {
+  async getTasks(filterDto: GetTasksFilterDto, erUser: ErUser): Promise<ErTask[]> {
     const { status, search } = filterDto;
     const query = this.createQueryBuilder('task');
 
-    query.andWhere('task.userId = :userId', { userId: user.id });
+    query.andWhere('task.userId = :userId', { userId: erUser.id });
 
     if (status) {
       query.andWhere('task.status = :status', { status });
@@ -32,24 +32,24 @@ export class TaskRepository extends Repository<Task> {
       return tasks;
     }
     catch (error) {
-      this.logger.error(`Failed to get tasks by user ${user.name}. Filters : ${JSON.stringify(filterDto)}`, error.stack);
+      this.logger.error(`Failed to get tasks by user ${erUser.username}. Filters : ${JSON.stringify(filterDto)}`, error.stack);
       throw new InternalServerErrorException('Internal Server Error! Try Again Later');
     }
   }
 
-  async createTask(createTaskDto: CreateTaskDto, user: User): Promise<Task> {
+  async createTask(createTaskDto: CreateTaskDto, erUser: ErUser): Promise<ErTask> {
     const { title, description } = createTaskDto;
 
-    const task = new Task();
+    const task = new ErTask();
     task.title = title;
     task.description = description;
     task.status = TaskStatus.OPEN;
-    task.user = user;
+    task.user = erUser;
 
     try {
       await task.save();
     } catch (error) {
-      this.logger.error(`Failed to save task by user ${user.name}. DTO : ${JSON.stringify(createTaskDto)}`, error.stack);
+      this.logger.error(`Failed to save task by user ${erUser.username}. DTO : ${JSON.stringify(createTaskDto)}`, error.stack);
       throw new InternalServerErrorException('Internal Server Error! Try Again Later');
     }
 

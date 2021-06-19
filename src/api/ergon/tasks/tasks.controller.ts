@@ -17,7 +17,7 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
-import { Task } from './task.entity';
+import { ErTask } from './task.entity';
 import { TaskStatus } from './enum/task-status.enum';
 
 @Controller('tasks')
@@ -30,7 +30,7 @@ export class TasksController {
   getTasks(
     @Query() filterDto: GetTasksFilterDto,
     @Req() req
-  ): Promise<Task[]> {
+  ): Promise<ErTask[]> {
     this.logger.verbose(`user ${req.user.name} retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
     return this.tasksService.getTasks(filterDto, req.user);
   }
@@ -39,7 +39,7 @@ export class TasksController {
   getTaskById(
     @Param('id', ParseIntPipe) id: number,
     @Req() req
-  ): Promise<Task> {
+  ): Promise<ErTask> {
     this.logger.verbose(`user ${req.user.name} retrieving single task by id.`);
     return this.tasksService.getTaskById(id, req.user);
   }
@@ -48,7 +48,7 @@ export class TasksController {
   createTask(
     @Body() createTaskDto: CreateTaskDto,
     @Req() req,
-  ): Promise<Task> {
+  ): Promise<ErTask> {
     this.logger.verbose(`user ${req.user.name} creating a new task. Data: ${JSON.stringify(createTaskDto)}`);
     return this.tasksService.createTask(createTaskDto, req.user);
   }
@@ -67,7 +67,7 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
     @Req() req
-  ): Promise<Task> {
+  ): Promise<ErTask> {
     this.logger.verbose(`user ${req.user.name} updating task. Status: ${status}`);
     return this.tasksService.updateTaskStatus(id, status, req.user);
   }
