@@ -1,27 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Patch,
-  Query,
-  ParseIntPipe,
-  UseGuards,
-  Req,
-  Logger,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { TasksService } from './tasks.service';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
-import { ErTask } from './task.entity';
-import { TaskStatus } from './enum/task-status.enum';
+import {Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, Query, Req,} from '@nestjs/common';
+import {TasksService} from './tasks.service';
+import {CreateTaskDto} from './dto/create-task.dto';
+import {GetTasksFilterDto} from './dto/get-tasks-filter.dto';
+import {TaskStatusValidationPipe} from './pipes/task-status-validation.pipe';
+import {ErTask} from './task.entity';
+import {TaskStatus} from './enum/task-status.enum';
 
 @Controller('tasks')
-@UseGuards(AuthGuard())
 export class TasksController {
   private logger = new Logger('TasksController');
   constructor(private tasksService: TasksService) { }
