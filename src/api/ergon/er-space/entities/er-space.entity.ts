@@ -11,8 +11,8 @@ export class ErSpace extends BaseEntity {
     @Column()
     name: string;
 
-    @OneToOne(type => ErUser, erUser => erUser.space, {eager: false})
-    author: ErUser;
+   // @OneToOne(type => ErUser, erUser => erUser.space, {eager: false})
+   // author: ErUser;
 
     @Column()
     visibility: string;
@@ -27,8 +27,8 @@ export class ErSpace extends BaseEntity {
     @UpdateDateColumn()
     lastUpdatedDate: Date;
 
-    @OneToMany(type => ErUser, erUser => erUser.space, {eager: false})
-    user: ErUser[];
+   // @OneToMany(type => ErUser, erUser => erUser.space, {eager: false})
+   // user: ErUser[];
 
     @OneToMany(type => ErTodolist, erTodolist => erTodolist.space, {eager: true})
     todolist: ErTodolist[];

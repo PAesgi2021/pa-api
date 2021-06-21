@@ -1,15 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ErUserService } from './er-user.service';
-import { CreateErUserDto } from './dto/create-er-user.dto';
-import { UpdateErUserDto } from './dto/update-er-user.dto';
+import {Body, Controller, Delete, Get, Logger, Param, Patch, Post} from '@nestjs/common';
+import {ErUserService} from './er-user.service';
+import {CreateErUserDto} from './dto/create-er-user.dto';
+import {UpdateErUserDto} from './dto/update-er-user.dto';
 
 @Controller('er-user')
 export class ErUserController {
-  constructor(private readonly erUserService: ErUserService) {}
+  private logger = new Logger('ErUserController');
+  constructor(private erUserService: ErUserService) { }
 
-  @Post()
-  create(@Body() createErUserDto: CreateErUserDto) {
-    return this.erUserService.create(createErUserDto);
+  @Post('/signup')
+  signUp(@Body() createErUserDto: CreateErUserDto): Promise<void> {
+    this.logger.verbose('Registering!'); // logging status
+    return this.erUserService.signUp(createErUserDto);
   }
 
   @Get()

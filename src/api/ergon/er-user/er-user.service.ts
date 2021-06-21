@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { CreateErUserDto } from './dto/create-er-user.dto';
-import { UpdateErUserDto } from './dto/update-er-user.dto';
+import {Injectable, Logger} from '@nestjs/common';
+import {CreateErUserDto} from './dto/create-er-user.dto';
+import {UpdateErUserDto} from './dto/update-er-user.dto';
+import {InjectRepository} from "@nestjs/typeorm";
+import {ErUserRepository} from "./er-user.repository";
 
 @Injectable()
 export class ErUserService {
-  create(createErUserDto: CreateErUserDto) {
-    return 'This action adds a new erUser';
+
+  private logger = new Logger('ErUserService');
+  constructor(
+      @InjectRepository(ErUserRepository)
+      private erUserRepository: ErUserRepository,
+
+  ) { }
+  signUp(createErUserDto: CreateErUserDto) {
+    return this.erUserRepository.signUp(createErUserDto);
   }
 
   findAll() {

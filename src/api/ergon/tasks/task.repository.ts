@@ -44,7 +44,7 @@ export class TaskRepository extends Repository<ErTask> {
     task.title = title;
     task.description = description;
     task.status = TaskStatus.OPEN;
-    task.user = erUser;
+    //task.user = erUser;
 
     try {
       await task.save();
@@ -53,7 +53,7 @@ export class TaskRepository extends Repository<ErTask> {
       throw new InternalServerErrorException('Internal Server Error! Try Again Later');
     }
 
-    delete task.user;
+    //delete task.user;
 
     return task;
   }
