@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateYtPostDto } from './dto/create-yt-post.dto';
 import { UpdateYtPostDto } from './dto/update-yt-post.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { YtPostRepository } from './yt-post.repository';
+import { YtPost } from './entities/yt-post.entity';
+
 
 @Injectable()
 export class YtPostService {
-  create(createYtPostDto: CreateYtPostDto) {
-    return 'This action adds a new ytPost';
+
+  constructor(@InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository) {}
+
+  async create(createYtPostDto: CreateYtPostDto): Promise<YtPost> {
+    return this.ytPostRepository.createPost(createYtPostDto);
   }
 
   findAll() {

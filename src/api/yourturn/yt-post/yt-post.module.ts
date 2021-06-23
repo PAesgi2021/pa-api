@@ -5,9 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 
 @Module({
-  // imports: [
-  //   TypeOrmModule.forFeature([YtPostRepository]),
-  // ],
+   imports: [
+     TypeOrmModule.forFeature([YtPostRepository]),
+   ],
   controllers: [YtPostController],
   providers: [YtPostService]
 })
