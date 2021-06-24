@@ -5,6 +5,7 @@ import { TestController } from './api/ergon/test/test.controller';
 import { YtPostModule } from './api/yourturn/yt-post/yt-post.module';
 import { YtPost } from './api/yourturn/yt-post/entities/yt-post.entity';
 import { YtUserModule } from './api/yourturn/yt-user/yt-user.module';
+import {YtUser} from "./api/yourturn/yt-user/entities/yt-user.entity";
 
 
 @Module({
@@ -15,7 +16,7 @@ import { YtUserModule } from './api/yourturn/yt-user/yt-user.module';
     username: 'postgres',
     password: 'root',
     database: 'pa-angular',
-    entities: [YtPost],
+    entities: [YtPost, YtUser],
     synchronize: true,
   }),
 
