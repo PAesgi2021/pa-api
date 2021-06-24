@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
-import { Message} from './entities/message.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageRepository } from './message.repository';
 
@@ -10,8 +9,8 @@ export class MessageService {
 
   constructor(@InjectRepository(MessageRepository) private messageRepository: MessageRepository) {}
 
-  async getMessages(): Promise<Message[]>{
-    return this.messageRepository.getMessage();
+  getMessages() {
+    return this.messageRepository.find();
   }
 
   create(createMessageDto: CreateMessageDto) {
@@ -19,14 +18,15 @@ export class MessageService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} message`;
+    return this.messageRepository.findOneOrFail(id);
   }
 
+
   update(id: number, updateMessageDto: UpdateMessageDto) {
-    return `This action updates a #${id} message`;
+    return this.messageRepository.update(id, updateMessageDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} message`;
+    return this.messageRepository.delete(id);
   }
 }

@@ -6,7 +6,9 @@ export class Message extends BaseEntity {
   id: number;
 
   @Column()
-  text: string;
+  content: string;
+
+  //like 
 
   @CreateDateColumn()
   @Column()

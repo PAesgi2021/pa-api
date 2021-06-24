@@ -2,10 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Logger } 
 import { MessageService } from './message.service';
 import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('message')
-@UseGuards(AuthGuard())
 export class MessageController {
   private logger = new Logger('messageController');
   constructor(private readonly messageService: MessageService) {}

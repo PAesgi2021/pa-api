@@ -7,14 +7,10 @@ import { CreateMessageDto } from './dto/create-message.dto';
 export class MessageRepository extends Repository<Message> {
   private logger = new Logger('messageRepository');
 
-  async getMessage(): Promise<Message[]> {
-      return await this.getMessage();
-  }
-
   async createMessage(createMessageDto: CreateMessageDto): Promise<Message> {
 
     const message = new Message();
-    message.text = createMessageDto.content;
+    message.content = createMessageDto.content;
     message.date = new Date(Date.now());
 
     try {

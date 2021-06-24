@@ -5,7 +5,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 import { YtPost } from './entities/yt-post.entity';
 
-
 @Injectable()
 export class YtPostService {
 

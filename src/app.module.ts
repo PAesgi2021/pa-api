@@ -11,7 +11,7 @@ import {MessageModule} from './api/yourturn/message/message.module';
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: 'postgres',
+    password: 'root',
     database: 'pa-angular',
     entities: [YtPost, Message],
     synchronize: true,
