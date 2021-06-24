@@ -3,9 +3,11 @@ import { YtUserService } from './yt-user.service';
 import { CreateYtUserDto } from './dto/create-yt-user.dto';
 import { UpdateYtUserDto } from './dto/update-yt-user.dto';
 
+
 @Controller('yt-user')
 export class YtUserController {
-  constructor(private readonly ytUserService: YtUserService) {}
+  constructor(private readonly ytUserService: YtUserService) {
+  }
 
   @Post()
   create(@Body() createYtUserDto: CreateYtUserDto) {

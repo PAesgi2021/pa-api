@@ -3,14 +3,13 @@ import { CreateYtPostDto } from './dto/create-yt-post.dto';
 import { UpdateYtPostDto } from './dto/update-yt-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
-import { YtPost } from './entities/yt-post.entity';
-import { UpdateResult } from 'typeorm';
 
 
 @Injectable()
 export class YtPostService {
 
-  constructor(@InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository) {}
+  constructor(@InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository) {
+  }
 
   create(createYtPostDto: CreateYtPostDto) {
     return this.ytPostRepository.createPost(createYtPostDto);

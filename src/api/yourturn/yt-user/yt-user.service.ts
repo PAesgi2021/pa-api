@@ -9,12 +9,12 @@ import { YtUserRepository } from './yt-user.repository';
 export class YtUserService {
 
   constructor(
-    @InjectRepository(YtUserRepository) private ytUserRepository: YtUserRepository
+    @InjectRepository(YtUserRepository) private ytUserRepository: YtUserRepository,
   ) {
   }
 
   create(createYtUserDto: CreateYtUserDto) {
-    return 'This action adds a new ytUser';
+    return this.ytUserRepository.create(createYtUserDto);
   }
 
   findAll() {
@@ -22,14 +22,14 @@ export class YtUserService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} ytUser`;
+    return this.ytUserRepository.findOneOrFail(id);
   }
 
   update(id: number, updateYtUserDto: UpdateYtUserDto) {
-    return `This action updates a #${id} ytUser`;
+    return this.ytUserRepository.update(id, updateYtUserDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} ytUser`;
+    return this.ytUserRepository.delete(id);
   }
 }

@@ -20,7 +20,7 @@ import {YtUser} from "./api/yourturn/yt-user/entities/yt-user.entity";
     synchronize: true,
   }),
 
-    TodolistModule, YtPostModule, YtUserModule],
+    YtPostModule, YtUserModule],
   controllers: [TestController],
 })
 export class AppModule {
