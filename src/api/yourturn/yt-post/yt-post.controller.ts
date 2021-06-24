@@ -19,7 +19,7 @@ export class YtPostController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.ytPostService.findOne(+id);
+    return this.ytPostService.findOneById(+id);
   }
 
   @Patch(':id')
