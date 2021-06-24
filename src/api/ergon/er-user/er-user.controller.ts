@@ -10,6 +10,7 @@ export class ErUserController {
 
   @Post('/signup')
   signUp(@Body() createErUserDto: CreateErUserDto): Promise<void> {
+    console.log("ENTERERD")
     this.logger.verbose('Registering!'); // logging status
     return this.erUserService.signUp(createErUserDto);
   }
