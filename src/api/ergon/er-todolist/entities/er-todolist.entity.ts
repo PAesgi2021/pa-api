@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn} from "typeorm";
 import {ErUser} from "../../er-user/entities/er-user.entity";
 import {ErSpace} from "../../er-space/entities/er-space.entity";
 import {ErTask} from "../../tasks/task.entity";
@@ -11,11 +11,11 @@ export class ErTodolist extends BaseEntity {
     @Column()
     title: string;
 
-    @OneToOne(type => ErSpace, erSpace => erSpace.todolist, {eager: false})
+    @ManyToOne(type => ErSpace, erSpace => erSpace.todolists)
     space: ErSpace;
 
-    @OneToMany(type => ErTask, erTask => erTask.todolist, {eager: true})
-    task: ErTask[];
+    @OneToMany(type => ErTask, erTask => erTask.todolist)
+    tasks: ErTask[];
 
     @Column()
     spaceId: number;

@@ -18,10 +18,10 @@ export class ErTask extends BaseEntity {
   @Column()
   status: TaskStatus;
 
- // @ManyToOne(type => ErUser, erUser => erUser.task, { eager: false })
-  //user: ErUser;
+  @ManyToOne(type => ErUser, erUser => erUser.tasks)
+  user: ErUser;
 
-  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.task, { eager: false })
+  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.tasks)
   todolist: ErTodolist;
 
   @Column()

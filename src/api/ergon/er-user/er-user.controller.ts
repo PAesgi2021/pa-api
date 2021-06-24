@@ -2,6 +2,7 @@ import {Body, Controller, Delete, Get, Logger, Param, Patch, Post} from '@nestjs
 import {ErUserService} from './er-user.service';
 import {CreateErUserDto} from './dto/create-er-user.dto';
 import {UpdateErUserDto} from './dto/update-er-user.dto';
+import {SignInUserDTO} from "./dto/SignInUser.dto";
 
 @Controller('er-user')
 export class ErUserController {
@@ -10,9 +11,13 @@ export class ErUserController {
 
   @Post('/signup')
   signUp(@Body() createErUserDto: CreateErUserDto): Promise<void> {
-    console.log("ENTERERD")
     this.logger.verbose('Registering!'); // logging status
     return this.erUserService.signUp(createErUserDto);
+  }
+  @Post('/signin')
+  signIn(@Body() signInUserDTO: SignInUserDTO): Promise<Number> {
+    this.logger.verbose('Registering!'); // logging status
+    return this.erUserService.signIn(signInUserDTO);
   }
 
   @Get()

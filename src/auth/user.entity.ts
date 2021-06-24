@@ -8,8 +8,6 @@ import {
 } from 'typeorm';
 const bcrypt = require('bcrypt');
 
-
-
 @Entity()
 @Unique(['email'])
 export class User extends BaseEntity {

@@ -25,17 +25,6 @@ import {ErUser} from "./api/ergon/er-user/entities/er-user.entity";
         synchronize: true,
         keepConnectionAlive: true,
     }),
-        TypeOrmModule.forRoot({
-            type: 'postgres',
-            host: 'localhost',
-            port: 5432,
-            username: 'postgres',
-            password: 'postgres',
-            database: 'pa-angular',
-            entities: [],
-            synchronize: true,
-            keepConnectionAlive: true,
-        }),
         ErTaskModule, AuthModule, TodolistModule, ErUserModule, ErSpaceModule, ErTodolistModule],
     controllers: [TestController],
 })
