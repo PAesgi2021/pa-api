@@ -8,7 +8,6 @@ import { AuthModule } from '../../../auth/auth.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([MessageRepository]),
-    AuthModule,
   ],
   controllers: [MessageController],
   providers: [MessageService],
