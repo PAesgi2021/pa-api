@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Message } from './entities/message.entity';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
+import { CreateMessageDto } from './dto/create-message.dto';
 
 @EntityRepository(Message)
 export class MessageRepository extends Repository<Message> {
@@ -10,10 +11,10 @@ export class MessageRepository extends Repository<Message> {
       return await this.getMessage();
   }
 
-  async createMessage(): Promise<Message> {
+  async createMessage(createMessageDto: CreateMessageDto): Promise<Message> {
 
     const message = new Message();
-    message.text = "text";
+    message.text = createMessageDto.content;
     message.date = new Date(Date.now());
 
     try {

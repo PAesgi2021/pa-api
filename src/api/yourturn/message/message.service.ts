@@ -8,15 +8,14 @@ import { MessageRepository } from './message.repository';
 @Injectable()
 export class MessageService {
 
-  constructor(
-    @InjectRepository(MessageRepository) private messageRepository: MessageRepository) {}
+  constructor(@InjectRepository(MessageRepository) private messageRepository: MessageRepository) {}
 
   async getMessages(): Promise<Message[]>{
     return this.messageRepository.getMessage();
   }
 
   create(createMessageDto: CreateMessageDto) {
-    return 'This action adds a new message';
+    return this.messageRepository.createMessage(createMessageDto);
   }
 
   findOne(id: number) {

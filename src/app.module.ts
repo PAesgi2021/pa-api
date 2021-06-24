@@ -5,6 +5,7 @@ import {TestController} from './api/ergon/test/test.controller';
 import {YtPostModule} from './api/yourturn/yt-post/yt-post.module';
 import {YtPost} from './api/yourturn/yt-post/entities/yt-post.entity';
 import { Message } from './api/yourturn/message/entities/message.entity';
+import { MessageModule } from './api/yourturn/message/message.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { Message } from './api/yourturn/message/entities/message.entity';
     synchronize: true,
   }),
 
-    TodolistModule, YtPostModule],
+    TodolistModule, YtPostModule, MessageModule],
   controllers: [TestController],
 })
 export class AppModule {}
