@@ -17,6 +17,6 @@ export class YtPost extends BaseEntity {
   isPrivate: boolean;
 
   @OneToMany(() => Message, message => message.post, {eager: true})
-  messages: Message[];
+  comments: Message[];
 
 }

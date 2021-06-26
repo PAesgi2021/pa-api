@@ -15,7 +15,7 @@ export class Message extends BaseEntity {
   @Column()
   date: Date;
 
-  @ManyToOne(() => YtPost, post => post.messages)
+  @ManyToOne(() => YtPost, post => post.comments)
   post: YtPost;
 
 }
