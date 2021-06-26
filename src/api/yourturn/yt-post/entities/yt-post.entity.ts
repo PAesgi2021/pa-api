@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Message } from '../../message/entities/message.entity';
 
 
 @Entity()
@@ -14,4 +15,8 @@ export class YtPost extends BaseEntity {
 
   @Column()
   isPrivate: boolean;
+
+  @OneToMany(() => Message, message => message.post, {eager: true})
+  messages: Message[];
+
 }

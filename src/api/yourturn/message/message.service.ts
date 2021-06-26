@@ -3,18 +3,25 @@ import { CreateMessageDto } from './dto/create-message.dto';
 import { UpdateMessageDto } from './dto/update-message.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MessageRepository } from './message.repository';
+import { YtPostRepository } from '../yt-post/yt-post.repository';
+
 
 @Injectable()
 export class MessageService {
 
-  constructor(@InjectRepository(MessageRepository) private messageRepository: MessageRepository) {}
+  constructor(
+    @InjectRepository(MessageRepository) private messageRepository: MessageRepository,
+    @InjectRepository(YtPostRepository) private postRepository: YtPostRepository,
+  ) {
+  }
 
   getMessages() {
     return this.messageRepository.find();
   }
 
-  create(createMessageDto: CreateMessageDto) {
-    return this.messageRepository.createMessage(createMessageDto);
+  async create(createMessageDto: CreateMessageDto) {
+    const post = await this.postRepository.findOneOrFail(createMessageDto.post_id);
+    return this.messageRepository.createMessage(createMessageDto, post);
   }
 
   findOne(id: number) {

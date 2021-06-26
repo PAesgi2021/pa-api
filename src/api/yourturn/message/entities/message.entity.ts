@@ -1,4 +1,5 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { YtPost } from '../../yt-post/entities/yt-post.entity';
 
 @Entity()
 export class Message extends BaseEntity {
@@ -14,6 +15,8 @@ export class Message extends BaseEntity {
   @Column()
   date: Date;
 
+  @ManyToOne(() => YtPost, post => post.messages)
+  post: YtPost;
 
 }
 
