@@ -12,8 +12,7 @@ export class MessageService {
   constructor(
     @InjectRepository(MessageRepository) private messageRepository: MessageRepository,
     @InjectRepository(YtPostRepository) private postRepository: YtPostRepository,
-  ) {
-  }
+  ) { }
 
   getMessages() {
     return this.messageRepository.find();

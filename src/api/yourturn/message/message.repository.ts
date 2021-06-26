@@ -18,8 +18,8 @@ export class MessageRepository extends Repository<Message> {
     try {
       await message.save();
     } catch (error) {
-      this.logger.error('Failed to save this message')
-      throw new InternalServerErrorException('Internal Server Error!')
+      this.logger.error('Failed to save this message');
+      throw new InternalServerErrorException('Internal Server Error!');
     }
 
     return message;

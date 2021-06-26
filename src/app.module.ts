@@ -7,6 +7,14 @@ import { YtUserModule } from './api/yourturn/yt-user/yt-user.module';
 import {YtUser} from "./api/yourturn/yt-user/entities/yt-user.entity";
 import { MessageModule } from './api/yourturn/message/message.module';
 import { Message } from './api/yourturn/message/entities/message.entity';
+import { ProfileModule } from './api/yourturn/profile/profile.module';
+import { RoleModule } from './api/yourturn/role/role.module';
+import { AccountModule } from './api/yourturn/account/account.module';
+import { Profile } from './api/yourturn/profile/entities/profile.entity';
+import { ProfileRoleModule } from './api/yourturn/profile-role/profile-role.module';
+import { ProfileRole } from './api/yourturn/profile-role/entities/profile-role.entity';
+import { Role } from './api/yourturn/role/entities/role.entity';
+import { Account } from './api/yourturn/account/entities/account.entity';
 
 
 @Module({
@@ -17,11 +25,11 @@ import { Message } from './api/yourturn/message/entities/message.entity';
     username: 'postgres',
     password: 'root',
     database: 'pa-angular',
-    entities: [YtPost, YtUser, Message],
+    entities: [YtPost, YtUser, Message, Profile, ProfileRole, Role, Account],
     synchronize: true,
   }),
 
-    YtPostModule, YtUserModule, MessageModule],
+    YtPostModule, YtUserModule, MessageModule, ProfileModule, RoleModule, AccountModule, ProfileRoleModule],
   controllers: [TestController],
 })
 export class AppModule {

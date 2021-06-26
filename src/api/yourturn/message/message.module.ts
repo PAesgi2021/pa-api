@@ -13,5 +13,4 @@ import { YtPostRepository } from '../yt-post/yt-post.repository';
   controllers: [MessageController],
   providers: [MessageService],
 })
-export class MessageModule {
-}
+export class MessageModule { }
