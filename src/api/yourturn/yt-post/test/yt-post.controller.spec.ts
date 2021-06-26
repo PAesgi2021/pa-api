@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { YtPostController } from './yt-post.controller';
-import { YtPostService } from './yt-post.service';
+import { YtPostController } from '../yt-post.controller';
+import { YtPostService } from '../yt-post.service';
 
 describe('YtPostController', () => {
   let controller: YtPostController;
