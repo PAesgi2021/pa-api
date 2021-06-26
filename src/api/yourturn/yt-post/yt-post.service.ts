@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { CreateYtPostDto } from './dto/create-yt-post.dto';
-import { UpdateYtPostDto } from './dto/update-yt-post.dto';
+import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
+import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 
@@ -10,7 +10,7 @@ export class YtPostService {
   constructor(@InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository) {
   }
 
-  create(createYtPostDto: CreateYtPostDto) {
+  create(createYtPostDto: YtCreateYtPostDto) {
     return this.ytPostRepository.createPost(createYtPostDto);
   }
 
@@ -22,7 +22,7 @@ export class YtPostService {
     return this.ytPostRepository.findOneOrFail(id);
   }
 
-  update(id: number, updateYtPostDto: UpdateYtPostDto) {
+  update(id: number, updateYtPostDto: YtUpdateYtPostDto) {
     return this.ytPostRepository.update(id, updateYtPostDto);
   }
 

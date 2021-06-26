@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { YtPostService } from './yt-post.service';
-import { CreateYtPostDto } from './dto/create-yt-post.dto';
-import { UpdateYtPostDto } from './dto/update-yt-post.dto';
+import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
+import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
 
 
 @Controller('yt-post')
@@ -10,7 +10,7 @@ export class YtPostController {
   }
 
   @Post()
-  create(@Body() createYtPostDto: CreateYtPostDto) {
+  create(@Body() createYtPostDto: YtCreateYtPostDto) {
     return this.ytPostService.create(createYtPostDto);
   }
 
@@ -25,7 +25,7 @@ export class YtPostController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateYtPostDto: UpdateYtPostDto) {
+  update(@Param('id') id: string, @Body() updateYtPostDto: YtUpdateYtPostDto) {
     return this.ytPostService.update(+id, updateYtPostDto);
   }
 

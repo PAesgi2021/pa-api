@@ -3,18 +3,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestController } from './api/ergon/test/test.controller';
 import { YtPostModule } from './api/yourturn/yt-post/yt-post.module';
 import { YtPost } from './api/yourturn/yt-post/entities/yt-post.entity';
-import { YtUserModule } from './api/yourturn/yt-user/yt-user.module';
-import {YtUser} from "./api/yourturn/yt-user/entities/yt-user.entity";
-import { MessageModule } from './api/yourturn/message/message.module';
-import { Message } from './api/yourturn/message/entities/message.entity';
-import { ProfileModule } from './api/yourturn/profile/profile.module';
-import { RoleModule } from './api/yourturn/role/role.module';
-import { AccountModule } from './api/yourturn/account/account.module';
-import { Profile } from './api/yourturn/profile/entities/profile.entity';
-import { ProfileRoleModule } from './api/yourturn/profile-role/profile-role.module';
-import { ProfileRole } from './api/yourturn/profile-role/entities/profile-role.entity';
-import { Role } from './api/yourturn/role/entities/role.entity';
-import { Account } from './api/yourturn/account/entities/account.entity';
+import { YtMessageModule } from './api/yourturn/yt-message/yt-message.module';
+import { YtMessage } from './api/yourturn/yt-message/entities/yt-message.entity';
+import { YtProfileModule } from './api/yourturn/yt-profile/yt-profile.module';
+import { YtRoleModule } from './api/yourturn/yt-role/yt-role.module';
+import { YtAccountModule } from './api/yourturn/yt-account/yt-account.module';
+import { YtProfile } from './api/yourturn/yt-profile/entities/yt-profile.entity';
+import { YtRole } from './api/yourturn/yt-role/entities/yt-role.entity';
+import { YtAccount } from './api/yourturn/yt-account/entities/yt-account.entity';
 
 
 @Module({
@@ -25,11 +21,11 @@ import { Account } from './api/yourturn/account/entities/account.entity';
     username: 'postgres',
     password: 'root',
     database: 'pa-angular',
-    entities: [YtPost, YtUser, Message, Profile, ProfileRole, Role, Account],
+    entities: [YtPost, YtMessage, YtProfile, YtRole, YtAccount],
     synchronize: true,
   }),
 
-    YtPostModule, YtUserModule, MessageModule, ProfileModule, RoleModule, AccountModule, ProfileRoleModule],
+    YtPostModule, YtMessageModule, YtProfileModule, YtRoleModule, YtAccountModule],
   controllers: [TestController],
 })
 export class AppModule {

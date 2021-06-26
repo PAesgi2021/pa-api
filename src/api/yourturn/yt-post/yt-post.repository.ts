@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { InternalServerErrorException, Logger } from '@nestjs/common';
-import { CreateYtPostDto } from './dto/create-yt-post.dto';
+import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
 import { YtPost } from './entities/yt-post.entity';
 
 
@@ -8,7 +8,7 @@ import { YtPost } from './entities/yt-post.entity';
 export class YtPostRepository extends Repository<YtPost> {
   private logger = new Logger('YtPostRepository');
 
-  async createPost(createPostDto: CreateYtPostDto): Promise<YtPost> {
+  async createPost(createPostDto: YtCreateYtPostDto): Promise<YtPost> {
     const post = new YtPost();
     post.title = createPostDto.title;
     post.description = createPostDto.description;
