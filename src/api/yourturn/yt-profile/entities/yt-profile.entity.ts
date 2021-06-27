@@ -3,10 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity, ManyToMany,
-  ManyToOne,
+  ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { YtAccount } from '../../yt-account/entities/yt-account.entity';
+import { YtProfileRole } from '../../yt-profile-role/entities/yt-profile-role.entity';
 
 @Entity()
 export class YtProfile extends BaseEntity {
@@ -28,6 +29,9 @@ export class YtProfile extends BaseEntity {
 
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
+
+  @OneToMany(() => YtProfileRole, profileRole => profileRole.profile, {eager: true})
+  profileRoles: YtProfileRole[];
 
   // @ManyToMany(() => YtRole, role => role.profiles, {eager : true})
   // roles: YtRole[];

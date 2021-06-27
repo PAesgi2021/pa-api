@@ -11,6 +11,8 @@ import { YtAccountModule } from './api/yourturn/yt-account/yt-account.module';
 import { YtProfile } from './api/yourturn/yt-profile/entities/yt-profile.entity';
 import { YtRole } from './api/yourturn/yt-role/entities/yt-role.entity';
 import { YtAccount } from './api/yourturn/yt-account/entities/yt-account.entity';
+import { YtProfileRoleModule } from './api/yourturn/yt-profile-role/yt-profile-role.module';
+import { YtProfileRole } from './api/yourturn/yt-profile-role/entities/yt-profile-role.entity';
 
 
 @Module({
@@ -21,11 +23,11 @@ import { YtAccount } from './api/yourturn/yt-account/entities/yt-account.entity'
     username: 'postgres',
     password: 'root',
     database: 'pa-angular',
-    entities: [YtPost, YtMessage, YtProfile, YtRole, YtAccount],
+    entities: [YtPost, YtMessage, YtProfile, YtRole, YtAccount, YtProfileRole],
     synchronize: true,
   }),
 
-    YtPostModule, YtMessageModule, YtProfileModule, YtRoleModule, YtAccountModule],
+    YtPostModule, YtMessageModule, YtProfileModule, YtRoleModule, YtAccountModule, YtProfileRoleModule],
   controllers: [TestController],
 })
 export class AppModule {
