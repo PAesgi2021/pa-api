@@ -1,8 +1,10 @@
-import {Body, Controller, Delete, Get, Logger, Param, Patch, Post} from '@nestjs/common';
+import {BadRequestException, Body, Controller, Delete, Get, Logger, Param, Patch, Post} from '@nestjs/common';
 import {ErUserService} from './er-user.service';
-import {CreateErUserDto} from './dto/create-er-user.dto';
+import {ErUserDto} from './dto/er-user.dto';
 import {UpdateErUserDto} from './dto/update-er-user.dto';
 import {SignInUserDTO} from "./dto/SignInUser.dto";
+import {ErUser} from "./entities/er-user.entity";
+import {response} from "express";
 
 @Controller('er-user')
 export class ErUserController {
@@ -10,14 +12,18 @@ export class ErUserController {
   constructor(private erUserService: ErUserService) { }
 
   @Post('/signup')
-  signUp(@Body() createErUserDto: CreateErUserDto): Promise<void> {
+  signUp(@Body() createErUserDto: ErUserDto): Promise<ErUser> {
     this.logger.verbose('Registering!'); // logging status
     return this.erUserService.signUp(createErUserDto);
   }
   @Post('/signin')
-  signIn(@Body() signInUserDTO: SignInUserDTO): Promise<Number> {
-    this.logger.verbose('Registering!'); // logging status
-    return this.erUserService.signIn(signInUserDTO);
+  signIn(@Body() signInUserDTO: SignInUserDTO): Promise<SignInUserDTO> {
+    this.logger.verbose('Logging!'); // logging status
+    const res = this.erUserService.signIn(signInUserDTO);
+    if (res === null) {
+      throw new BadRequestException('Invalid user');
+    }
+    return res;
   }
 
   @Get()

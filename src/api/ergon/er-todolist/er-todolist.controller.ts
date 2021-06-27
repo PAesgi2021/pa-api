@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ErTodolistService } from './er-todolist.service';
-import { CreateErTodolistDto } from './dto/create-er-todolist.dto';
+import { ErTodolistDto } from './dto/er-todolist.dto';
 import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
 
 @Controller('er-todolist')
@@ -8,7 +8,7 @@ export class ErTodolistController {
   constructor(private readonly erTodolistService: ErTodolistService) {}
 
   @Post()
-  create(@Body() createErTodolistDto: CreateErTodolistDto) {
+  create(@Body() createErTodolistDto: ErTodolistDto) {
     return this.erTodolistService.create(createErTodolistDto);
   }
 

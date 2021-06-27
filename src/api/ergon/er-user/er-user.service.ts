@@ -1,11 +1,12 @@
 import {Injectable, Logger, UnauthorizedException} from '@nestjs/common';
-import {CreateErUserDto} from './dto/create-er-user.dto';
+import {ErUserDto} from './dto/er-user.dto';
 import {UpdateErUserDto} from './dto/update-er-user.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ErUserRepository} from "./er-user.repository";
 import {SignInDto} from "../../../auth/dto/signin.dto";
 import {JwtPayload} from "../../../auth/interfaces/jwt-payload.interface";
 import {SignInUserDTO} from "./dto/SignInUser.dto";
+import {ErUser} from "./entities/er-user.entity";
 
 @Injectable()
 export class ErUserService {
@@ -16,21 +17,30 @@ export class ErUserService {
       private erUserRepository: ErUserRepository,
 
   ) { }
-  async signUp(createErUserDto: CreateErUserDto) {
-    return this.erUserRepository.signUp(createErUserDto);
+  async signUp(createErUserDto: ErUserDto): Promise<ErUser> {
+
+    const user = this.erUserRepository.signUp(createErUserDto);
+
+    this.logger.debug(`Successfully Registered User`);
+
+    return user;
   }
 
-  async signIn(signInUserDto: SignInUserDTO): Promise<number> {
+  async signIn(signInUserDto: SignInUserDTO): Promise<SignInUserDTO> {
     const user = await this.erUserRepository.validateUserPassword(signInUserDto);
 
     if (!user) {
       throw new UnauthorizedException('Invalid Credentials');
     }
 
+    const result: SignInUserDTO = {...user};
 
     this.logger.debug(`Successfully Authenticated User ${JSON.stringify(user.username)}`);
 
-    return 1;
+
+
+    return result;
+
   }
 
   findAll() {

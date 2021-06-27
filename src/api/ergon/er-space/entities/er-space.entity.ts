@@ -2,9 +2,9 @@ import {
     BaseEntity,
     Column,
     Entity,
-    JoinColumn, ManyToOne,
+    ManyToMany,
+    ManyToOne,
     OneToMany,
-    OneToOne,
     PrimaryGeneratedColumn,
     UpdateDateColumn
 } from "typeorm";
@@ -20,7 +20,7 @@ export class ErSpace extends BaseEntity {
     @Column()
     name: string;
 
-    @ManyToOne( type => ErUser, erUser => erUser.spaces)
+    @ManyToOne(type => ErUser, erUser => erUser.spacesCreator,{eager: true})
     author: ErUser;
 
     @Column()
@@ -38,9 +38,5 @@ export class ErSpace extends BaseEntity {
 
     @OneToMany(type => ErTodolist, erTodolist => erTodolist.space, {eager: true})
     todolists: ErTodolist[];
-
-    @Column()
-    userId: number;
-
 
 }

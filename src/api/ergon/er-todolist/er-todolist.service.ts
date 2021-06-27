@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateErTodolistDto } from './dto/create-er-todolist.dto';
+import { ErTodolistDto } from './dto/er-todolist.dto';
 import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
 
 @Injectable()
 export class ErTodolistService {
-  create(createErTodolistDto: CreateErTodolistDto) {
+  create(createErTodolistDto: ErTodolistDto) {
     return 'This action adds a new erTodolist';
   }
 

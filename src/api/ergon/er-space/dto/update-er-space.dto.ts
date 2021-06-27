@@ -1,4 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateErSpaceDto } from './create-er-space.dto';
+import {ErSpaceDTO} from "./er-space.dto";
 
-export class UpdateErSpaceDto extends PartialType(CreateErSpaceDto) {}
+
+export class UpdateErSpaceDto extends PartialType(ErSpaceDTO) {}

@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique} from "typeorm";
+import {BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn, Unique} from "typeorm";
 import {ErSpace} from "../../er-space/entities/er-space.entity";
 import {ErTask} from "../../tasks/task.entity";
 
@@ -18,10 +18,16 @@ export class ErUser extends BaseEntity {
     password: string;
 
     @Column()
+    firstname: string;
+
+    @Column()
+    lastname: string;
+
+    @Column()
     salt: string;
 
     @OneToMany(type => ErSpace, ErSpace => ErSpace.author)
-    spaces: ErSpace[];
+    spacesCreator: ErSpace[];
 
     @OneToMany(type => ErTask, ErTask => ErTask.user)
     tasks: ErTask[];

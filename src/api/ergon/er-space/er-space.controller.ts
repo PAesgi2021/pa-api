@@ -1,19 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, Logger} from '@nestjs/common';
 import { ErSpaceService } from './er-space.service';
-import { CreateErSpaceDto } from './dto/create-er-space.dto';
+import { ErSpaceDTO } from './dto/er-space.dto';
 import { UpdateErSpaceDto } from './dto/update-er-space.dto';
+import {ErSpaceListDTO} from "./dto/er-spacelist.dto";
 
 @Controller('er-space')
 export class ErSpaceController {
   constructor(private readonly erSpaceService: ErSpaceService) {}
 
-  @Post()
-  create(@Body() createErSpaceDto: CreateErSpaceDto) {
-    return this.erSpaceService.create(createErSpaceDto);
+  @Post("/save")
+  create(@Body() erSpaceDto: ErSpaceDTO) {
+    console.log("post space")
+    return this.erSpaceService.create(erSpaceDto);
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<ErSpaceListDTO> {
     return this.erSpaceService.findAll();
   }
 
