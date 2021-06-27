@@ -10,7 +10,7 @@ export class YtProfileService {
 
   constructor(
     @InjectRepository(YtProfileRepository) private profileRepository: YtProfileRepository,
-    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository,
+    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository
   ) { }
 
   async create(createProfileDto: YtCreateProfileDto) {

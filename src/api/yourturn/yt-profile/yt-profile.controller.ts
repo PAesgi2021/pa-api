@@ -3,7 +3,7 @@ import { YtProfileService } from './yt-profile.service';
 import { YtCreateProfileDto } from './dto/yt-create-profile.dto';
 import { YtUpdateProfileDto } from './dto/yt-update-profile.dto';
 
-@Controller('profile')
+@Controller('yt-profile')
 export class YtProfileController {
   constructor(private readonly profileService: YtProfileService) {}
 

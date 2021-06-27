@@ -3,7 +3,7 @@ import { YtMessageService } from './yt-message.service';
 import { YtCreateMessageDto } from './dto/yt-create-message.dto';
 import { YtUpdateMessageDto } from './dto/yt-update-message.dto';
 
-@Controller('message')
+@Controller('yt-message')
 export class YtMessageController {
   private logger = new Logger('messageController');
   constructor(private readonly messageService: YtMessageService) {}

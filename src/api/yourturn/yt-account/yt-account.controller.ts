@@ -3,7 +3,7 @@ import { YtAccountService } from './yt-account.service';
 import { YtCreateAccountDto } from './dto/yt-create-account.dto';
 import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
 
-@Controller('account')
+@Controller('yt-account')
 export class YtAccountController {
   constructor(private readonly accountService: YtAccountService) {}
 

@@ -3,7 +3,7 @@ import { YtRoleService } from './yt-role.service';
 import { YtCreateRoleDto } from './dto/yt-create-role.dto';
 import { YtUpdateRoleDto } from './dto/yt-update-role.dto';
 
-@Controller('role')
+@Controller('yt-role')
 export class YtRoleController {
   constructor(private readonly roleService: YtRoleService) {}
 

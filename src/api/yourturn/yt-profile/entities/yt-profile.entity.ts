@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { YtAccount } from '../../yt-account/entities/yt-account.entity';
-import { YtRole } from '../../yt-role/entities/yt-role.entity';
 
 @Entity()
 export class YtProfile extends BaseEntity {
@@ -27,10 +26,10 @@ export class YtProfile extends BaseEntity {
   @Column()
   creationDate: Date;
 
-  @ManyToMany(() => YtRole, role => role.profiles)
-  roles: YtRole[];
-
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
+
+  // @ManyToMany(() => YtRole, role => role.profiles, {eager : true})
+  // roles: YtRole[];
 
 }

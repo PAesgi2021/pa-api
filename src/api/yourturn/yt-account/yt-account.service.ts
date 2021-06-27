@@ -23,7 +23,7 @@ export class YtAccountService {
   }
 
   update(id: number, updateAccountDto: YtUpdateAccountDto) {
-    return `This action updates a #${id} account`;
+    return this.accountRepository.update(id, updateAccountDto);
   }
 
   remove(id: number) {

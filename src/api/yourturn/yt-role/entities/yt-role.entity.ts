@@ -1,5 +1,4 @@
 import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { YtProfile } from '../../yt-profile/entities/yt-profile.entity';
 
 @Entity()
 export class YtRole extends BaseEntity {
@@ -9,6 +8,6 @@ export class YtRole extends BaseEntity {
   @Column()
   role: string;
 
-  @ManyToMany(() => YtProfile, profile => profile.roles)
-  profiles: YtProfile[];
+  // @ManyToMany(() => YtProfile, profile => profile.roles)
+  // profiles: YtProfile[];
 }
