@@ -12,8 +12,9 @@ export class YtMessageRepository extends Repository<YtMessage> {
 
     const message = new YtMessage();
     message.content = createMessageDto.content;
-    message.date = new Date(Date.now());
+    message.createAt = new Date(Date.now());
     message.post = post;
+    message.likes = 0;
 
     try {
       await message.save();

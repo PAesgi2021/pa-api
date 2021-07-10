@@ -1,5 +1,7 @@
+
 export class YtCreateYtPostDto {
-  title: string;
   description: string;
+  profile_id: number;
+  image: string;
   isPrivate = false;
 }

@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { YtAccount } from '../../yt-account/entities/yt-account.entity';
 import { YtProfileRole } from '../../yt-profile-role/entities/yt-profile-role.entity';
+import { YtPost } from '../../yt-post/entities/yt-post.entity';
 
 @Entity()
 export class YtProfile extends BaseEntity {
@@ -23,9 +24,12 @@ export class YtProfile extends BaseEntity {
   @Column()
   lastName: string;
 
-  @CreateDateColumn()
   @Column()
-  creationDate: Date;
+  createdAt: Date;
+
+  @Column()
+  updatedAt: Date;
+
 
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
@@ -33,7 +37,7 @@ export class YtProfile extends BaseEntity {
   @OneToMany(() => YtProfileRole, profileRole => profileRole.profile, {eager: true})
   profileRoles: YtProfileRole[];
 
-  // @ManyToMany(() => YtRole, role => role.profiles, {eager : true})
-  // roles: YtRole[];
+  @OneToMany(() => YtPost, object => object.profile)
+  posts: YtPost[];
 
 }

@@ -4,11 +4,13 @@ import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { YtAccountRepository } from './yt-account.repository';
 
+
 @Injectable()
 export class YtAccountService {
 
   constructor(
-    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository) { }
+    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository) {
+  }
 
   create(createAccountDto: YtCreateAccountDto) {
     return this.accountRepository.createAccount(createAccountDto);

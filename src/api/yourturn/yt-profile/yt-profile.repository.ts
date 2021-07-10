@@ -14,7 +14,8 @@ export class YtProfileRepository extends Repository<YtProfile> {
     profile.pseudo = createProfileDto.pseudo;
     profile.firstName = createProfileDto.firstName;
     profile.lastName = createProfileDto.lastName;
-    profile.creationDate = new Date(Date.now());
+    profile.createdAt = new Date(Date.now());
+    profile.updatedAt = new Date(Date.now());
     profile.account = account;
 
     try {

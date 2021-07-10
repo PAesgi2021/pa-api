@@ -9,11 +9,11 @@ export class YtMessage extends BaseEntity {
   @Column()
   content: string;
 
-  //like 
-
   @CreateDateColumn()
+  createAt: Date;
+
   @Column()
-  date: Date;
+  likes: number;
 
   @ManyToOne(() => YtPost, post => post.comments)
   post: YtPost;
