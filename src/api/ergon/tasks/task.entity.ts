@@ -1,4 +1,4 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, IsNull} from 'typeorm';
 import { TaskStatus } from './enum/task-status.enum';
 import { User } from '../../../auth/user.entity';
 import {ErUser} from "../er-user/entities/er-user.entity";
@@ -16,7 +16,24 @@ export class ErTask extends BaseEntity {
   description: string;
 
   @Column()
-  status: TaskStatus;
+  status: string;
+
+  @Column()
+  deadline: Date;
+
+  @Column({
+    nullable: true,
+  })
+  finishedDate: Date;
+
+  @Column()
+  limitDescription: number;
+
+
+  @Column({
+    nullable: true,
+  })
+  userId: number;
 
   @ManyToOne(type => ErUser, erUser => erUser.tasks)
   user: ErUser;
@@ -24,6 +41,4 @@ export class ErTask extends BaseEntity {
   @ManyToOne(type => ErTodolist, erTodolist => erTodolist.tasks)
   todolist: ErTodolist;
 
-  @Column()
-  userId: number;
 }

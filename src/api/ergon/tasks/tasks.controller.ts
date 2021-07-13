@@ -1,12 +1,12 @@
 import {Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, Query, Req,} from '@nestjs/common';
 import {TasksService} from './tasks.service';
-import {CreateTaskDto} from './dto/create-task.dto';
+import {ErTaskDto} from './dto/task.dto';
 import {GetTasksFilterDto} from './dto/get-tasks-filter.dto';
 import {TaskStatusValidationPipe} from './pipes/task-status-validation.pipe';
 import {ErTask} from './task.entity';
 import {TaskStatus} from './enum/task-status.enum';
 
-@Controller('tasks')
+@Controller('er-tasks')
 export class TasksController {
   private logger = new Logger('TasksController');
   constructor(private tasksService: TasksService) { }
@@ -29,14 +29,13 @@ export class TasksController {
     return this.tasksService.getTaskById(id, req.user);
   }
 
-  @Post()
+  @Post('/save')
   createTask(
-    @Body() createTaskDto: CreateTaskDto,
+    @Body() createTaskDto: ErTaskDto,
     @Req() req,
   ): Promise<ErTask> {
-
-    //this.logger.verbose(`user ${req.user.name} creating a new task. Data: ${JSON.stringify(createTaskDto)}`);
-    return this.tasksService.createTask(createTaskDto, req.user);
+    this.logger.verbose("saving new task");
+    return this.tasksService.createTask(createTaskDto);
   }
 
   @Delete('/:id')

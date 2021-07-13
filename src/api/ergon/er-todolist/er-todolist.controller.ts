@@ -7,8 +7,9 @@ import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
 export class ErTodolistController {
   constructor(private readonly erTodolistService: ErTodolistService) {}
 
-  @Post()
+  @Post('/save')
   create(@Body() createErTodolistDto: ErTodolistDto) {
+    console.log("saving new todolist")
     return this.erTodolistService.create(createErTodolistDto);
   }
 

@@ -1,5 +1,6 @@
 import {ErUserDto} from "../../er-user/dto/er-user.dto";
 import {ErTodolistDto} from "../../er-todolist/dto/er-todolist.dto";
+import {ErTodolist} from "../../er-todolist/entities/er-todolist.entity";
 
 export class ErSpaceDTO {
 
@@ -10,6 +11,6 @@ export class ErSpaceDTO {
     tag: string;
     description: string;
     lastUpdatedDate: Date;
-    todolists: ErTodolistDto[];
+    todolists: ErTodolist[];
 
 }

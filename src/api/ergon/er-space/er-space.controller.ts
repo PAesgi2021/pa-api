@@ -1,4 +1,4 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Logger} from '@nestjs/common';
+import {Controller, Get, Post, Body, Patch, Param, Delete, Logger, Put} from '@nestjs/common';
 import { ErSpaceService } from './er-space.service';
 import { ErSpaceDTO } from './dto/er-space.dto';
 import { UpdateErSpaceDto } from './dto/update-er-space.dto';
@@ -24,9 +24,10 @@ export class ErSpaceController {
     return this.erSpaceService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateErSpaceDto: UpdateErSpaceDto) {
-    return this.erSpaceService.update(+id, updateErSpaceDto);
+  @Put('/update')
+  update( @Body() updateErSpaceDto: UpdateErSpaceDto) {
+    console.log("UPDATE SPACE")
+    return this.erSpaceService.update(updateErSpaceDto.id, updateErSpaceDto);
   }
 
   @Delete(':id')

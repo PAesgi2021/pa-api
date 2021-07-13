@@ -5,6 +5,10 @@ import {ErSpaceDTO} from "./dto/er-space.dto";
 import {InjectRepository} from "@nestjs/typeorm";
 import {ErSpaceRepository} from "./er-space.repository";
 import {ErSpaceListDTO} from "./dto/er-spacelist.dto";
+import {ErSpace} from "./entities/er-space.entity";
+import {ErUser} from "../er-user/entities/er-user.entity";
+import {ErTodolist} from "../er-todolist/entities/er-todolist.entity";
+import {ErTask} from "../tasks/task.entity";
 
 
 @Injectable()
@@ -40,8 +44,16 @@ export class ErSpaceService {
     return `This action returns a #${id} erSpace`;
   }
 
-  update(id: number, updateErSpaceDto: UpdateErSpaceDto) {
-    return `This action updates a #${id} erSpace`;
+  async update(id: number, updateErSpaceDto: UpdateErSpaceDto) {
+    let updatedSpace: ErSpace = await ErSpace.findOne({id});
+    updatedSpace.visibility = updateErSpaceDto.visibility;
+    updatedSpace.tag = updateErSpaceDto.tag;
+    updatedSpace.name = updateErSpaceDto.name;
+    updatedSpace.description = updateErSpaceDto.description;
+
+
+
+    return `This action update a #${id} erSpace`;
   }
 
   remove(id: number) {
