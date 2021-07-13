@@ -1,4 +1,4 @@
-export class YtCreateAccountDto {
+export class YtAccountDto {
   username: string;
   password: string;
 }
