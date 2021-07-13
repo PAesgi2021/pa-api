@@ -24,7 +24,7 @@ export class YtAccountService {
     }
 
     const response: YtAccountDto = {...account}
-    this.logger.debug(`Successfully Authenticated User ${JSON.stringify(response.username)}`);
+    this.logger.debug(`Successfully Authenticated User ${JSON.stringify(response.email)}`);
     return account;
   }
 
