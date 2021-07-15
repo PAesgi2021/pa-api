@@ -17,6 +17,8 @@ export class YtAccountController {
   @Post('/login')
   signIn(@Body() signInAccountDTO: YtAccountDto): Promise<YtAccountDto> {
     this.logger.verbose('Logging!');
+    this.logger.verbose(signInAccountDTO.email)
+    this.logger.verbose(signInAccountDTO.password)
     return this.accountService.signIn(signInAccountDTO);
   }
 
