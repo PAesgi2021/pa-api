@@ -14,6 +14,7 @@ import { YtAccountService } from './yt-account.service';
 import { YtAccountDto } from './dto/yt-account.dto';
 import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
 import {AuthGuard} from "@nestjs/passport";
+import cookieParser, {JSONCookie} from "cookie-parser";
 
 @Controller('yt-account')
 export class YtAccountController {
@@ -27,7 +28,8 @@ export class YtAccountController {
   }
 
   @Post('/login')
-  signIn(@Body() signInAccountDTO: YtAccountDto): Promise<YtAccountDto> {
+  signIn(@Body() signInAccountDTO: YtAccountDto,
+         @Req() req): Promise<YtAccountDto> {
     this.logger.verbose('Logging!');
     this.logger.verbose(signInAccountDTO.email)
     this.logger.verbose(signInAccountDTO.password)
@@ -54,7 +56,7 @@ export class YtAccountController {
     return this.accountService.remove(+id);
   }
 
-  @Post('/test')
+  @Post('/isAuthenticated')
   @UseGuards(AuthGuard('jwt'))
   test(@Req() req) {
     console.log(req.email)
