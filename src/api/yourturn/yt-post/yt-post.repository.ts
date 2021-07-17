@@ -20,6 +20,8 @@ export class YtPostRepository extends Repository<YtPost> {
 
     if (createPostDto.image)
       post.image = createPostDto.image;
+    else
+      post.image = "";
 
     try {
       await post.save();
