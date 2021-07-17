@@ -15,6 +15,7 @@ export class YtAccountRepository extends Repository<YtAccount> {
     account.email = email;
     account.salt = await bcrypt.genSalt();
     account.password = await this.hashPassword(password, account.salt);
+    account.name = '';
 
     try {
       await account.save();
@@ -26,8 +27,10 @@ export class YtAccountRepository extends Repository<YtAccount> {
     return account;
   }
 
-  async validateUserPassword(signInAccountDTO: YtAccountDto): Promise<{ id: number, email: string, password: string }> {
-    const {email, password} = signInAccountDTO;
+  async validateUserPassword(signInAccountDTO: YtAccountDto): Promise<{
+    name: string;
+    id: number, email: string, password: string }> {
+    const {email, password, name} = signInAccountDTO;
     const account = await this.findOne({email});
     if (account && await account.validatePassword(password)) {
       return account;

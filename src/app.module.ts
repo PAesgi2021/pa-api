@@ -13,6 +13,7 @@ import { YtRole } from './api/yourturn/yt-role/entities/yt-role.entity';
 import { YtAccount } from './api/yourturn/yt-account/entities/yt-account.entity';
 import { YtProfileRoleModule } from './api/yourturn/yt-profile-role/yt-profile-role.module';
 import { YtProfileRole } from './api/yourturn/yt-profile-role/entities/yt-profile-role.entity';
+import {AuthModule} from "./auth/auth.module";
 
 
 @Module({

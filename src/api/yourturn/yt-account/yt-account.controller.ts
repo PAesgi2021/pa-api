@@ -1,7 +1,19 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Logger, BadRequestException} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Logger,
+  BadRequestException,
+  UseGuards, Req
+} from '@nestjs/common';
 import { YtAccountService } from './yt-account.service';
 import { YtAccountDto } from './dto/yt-account.dto';
 import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
+import {AuthGuard} from "@nestjs/passport";
 
 @Controller('yt-account')
 export class YtAccountController {
@@ -40,5 +52,11 @@ export class YtAccountController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.accountService.remove(+id);
+  }
+
+  @Post('/test')
+  @UseGuards(AuthGuard('jwt'))
+  test(@Req() req) {
+    console.log(req.email)
   }
 }

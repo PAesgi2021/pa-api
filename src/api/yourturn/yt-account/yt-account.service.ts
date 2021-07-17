@@ -1,46 +1,61 @@
 import {Injectable, Logger, UnauthorizedException} from '@nestjs/common';
-import { YtAccountDto } from './dto/yt-account.dto';
-import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { YtAccountRepository } from './yt-account.repository';
+import {YtAccountDto} from './dto/yt-account.dto';
+import {YtUpdateAccountDto} from './dto/yt-update-account.dto';
+import {InjectRepository} from '@nestjs/typeorm';
+import {YtAccountRepository} from './yt-account.repository';
+import {JwtService} from "@nestjs/jwt";
+import {JwtPayloadYourturn} from "./interfaces/jwt-payload.interface.yourturn";
 
 
 @Injectable()
 export class YtAccountService {
-  private logger = new Logger('YtAccountService');
-  constructor(
-    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository) {
-  }
+    private logger = new Logger('YtAccountService');
 
-  create(createAccountDto: YtAccountDto) {
-    return this.accountRepository.createAccount(createAccountDto);
-  }
-
-  async signIn(signInAccountDto: YtAccountDto): Promise<YtAccountDto> {
-    const account = await this.accountRepository.validateUserPassword(signInAccountDto);
-
-    if (!account) {
-      throw new UnauthorizedException('Invalid Credentials');
+    constructor(
+        @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository,
+        private jwtService: JwtService
+    ) {
     }
 
-    const response: YtAccountDto = {...account}
-    this.logger.debug(`Successfully Authenticated User ${JSON.stringify(response.email)}`);
-    return account;
-  }
+    create(createAccountDto: YtAccountDto) {
+        return this.accountRepository.createAccount(createAccountDto);
+    }
 
-  findAll() {
-    return this.accountRepository.find();
-  }
+    async signIn(signInAccountDto: YtAccountDto): Promise<YtAccountDto> {
+        const account = await this.accountRepository.validateUserPassword(signInAccountDto);
 
-  findOne(id: number) {
-    return this.accountRepository.findOne(id);
-  }
+        if (!account) {
+            throw new UnauthorizedException('Invalid Credentials');
+        }
 
-  update(id: number, updateAccountDto: YtUpdateAccountDto) {
-    return this.accountRepository.update(id, updateAccountDto);
-  }
+        const payload: JwtPayloadYourturn = {
+            id: account.id,
+            email: account.email,
+            name: account.name
+        }
 
-  remove(id: number) {
-    return this.accountRepository.delete(id);
-  }
+        const accessToken = this.jwtService.sign(payload);
+        const accountDTO = {...account, access_token: accessToken};
+        this.logger.debug(`Successfully Generated JWT Token with payload ${JSON.stringify(payload)}`);
+        this.logger.debug(`Successfully Authenticated User ${JSON.stringify(account.email)}`);
+
+        return accountDTO;
+
+    }
+
+    findAll() {
+        return this.accountRepository.find();
+    }
+
+    findOne(id: number) {
+        return this.accountRepository.findOne(id);
+    }
+
+    update(id: number, updateAccountDto: YtUpdateAccountDto) {
+        return this.accountRepository.update(id, updateAccountDto);
+    }
+
+    remove(id: number) {
+        return this.accountRepository.delete(id);
+    }
 }
