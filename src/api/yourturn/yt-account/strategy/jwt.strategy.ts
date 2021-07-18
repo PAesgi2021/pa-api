@@ -5,7 +5,6 @@ import {ExtractJwt, Strategy} from "passport-jwt";
 import {YtAccountRepository} from "../yt-account.repository";
 import {YtAccount} from "../entities/yt-account.entity";
 import {JwtPayloadYourturn} from "../interfaces/jwt-payload.interface.yourturn";
-import { Request } from 'express';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -14,9 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         private ytAccountRepository: YtAccountRepository,
     ) {
         super({
-            jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
-                return JSON.parse(request?.cookies?.yourturncookie).access_token;
-            }]),
+            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: 'supersecretkey$',
         });
     }

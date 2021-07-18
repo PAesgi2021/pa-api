@@ -1,4 +1,17 @@
-import {Body, Controller, Delete, Get, Logger, Param, Patch, Post, Req, UseGuards} from '@nestjs/common';
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpStatus,
+    Logger,
+    Param,
+    Patch,
+    Post,
+    Req,
+    UseGuards
+} from '@nestjs/common';
 import {YtAccountService} from './yt-account.service';
 import {YtAccountDto} from './dto/yt-account.dto';
 import {YtUpdateAccountDto} from './dto/yt-update-account.dto';
@@ -23,7 +36,12 @@ export class YtAccountController {
         this.logger.verbose('Logging!');
         this.logger.verbose(signInAccountDTO.email)
         this.logger.verbose(signInAccountDTO.password)
-        return this.accountService.signIn(signInAccountDTO);
+        const response = this.accountService.signIn(signInAccountDTO);
+        if (response) {
+            return response;
+        } else {
+        throw new BadRequestException;
+        }
     }
 
     @Get()
@@ -48,7 +66,8 @@ export class YtAccountController {
 
     @Post('/isAuthenticated')
     @UseGuards(AuthGuard('jwt'))
-    test(@Req() req) {
-        console.log(req.email)
+    test(@Req() req): number {
+        this.logger.verbose("authentication in progress");
+        return 202;
     }
 }
