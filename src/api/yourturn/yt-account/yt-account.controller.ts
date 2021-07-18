@@ -1,42 +1,73 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Logger, BadRequestException} from '@nestjs/common';
-import { YtAccountService } from './yt-account.service';
-import { YtAccountDto } from './dto/yt-account.dto';
-import { YtUpdateAccountDto } from './dto/yt-update-account.dto';
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    HttpStatus,
+    Logger,
+    Param,
+    Patch,
+    Post,
+    Req,
+    UseGuards
+} from '@nestjs/common';
+import {YtAccountService} from './yt-account.service';
+import {YtAccountDto} from './dto/yt-account.dto';
+import {YtUpdateAccountDto} from './dto/yt-update-account.dto';
+import {AuthGuard} from "@nestjs/passport";
 
 @Controller('yt-account')
 export class YtAccountController {
-  private logger = new Logger('ErUserController');
-  constructor(private readonly accountService: YtAccountService) {}
+    private logger = new Logger('ErUserController');
 
-  @Post()
-  create(@Body() createAccountDto: YtAccountDto) {
-    this.logger.verbose('Registering!');
-    return this.accountService.create(createAccountDto);
-  }
+    constructor(private readonly accountService: YtAccountService) {
+    }
 
-  @Post('/login')
-  signIn(@Body() signInAccountDTO: YtAccountDto): Promise<YtAccountDto> {
-    this.logger.verbose('Logging!');
-    return this.accountService.signIn(signInAccountDTO);
-  }
+    @Post()
+    create(@Body() createAccountDto: YtAccountDto) {
+        this.logger.verbose('Registering!');
+        return this.accountService.create(createAccountDto);
+    }
 
-  @Get()
-  findAll() {
-    return this.accountService.findAll();
-  }
+    @Post('/login')
+    signIn(@Body() signInAccountDTO: YtAccountDto,
+           @Req() req): Promise<YtAccountDto> {
+        this.logger.verbose('Logging!');
+        this.logger.verbose(signInAccountDTO.email)
+        this.logger.verbose(signInAccountDTO.password)
+        const response = this.accountService.signIn(signInAccountDTO);
+        if (response) {
+            return response;
+        } else {
+        throw new BadRequestException;
+        }
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountService.findOne(+id);
-  }
+    @Get()
+    findAll() {
+        return this.accountService.findAll();
+    }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccountDto: YtUpdateAccountDto) {
-    return this.accountService.update(+id, updateAccountDto);
-  }
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.accountService.findOne(+id);
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.accountService.remove(+id);
-  }
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateAccountDto: YtUpdateAccountDto) {
+        return this.accountService.update(+id, updateAccountDto);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.accountService.remove(+id);
+    }
+
+    @Post('/isAuthenticated')
+    @UseGuards(AuthGuard('jwt'))
+    test(@Req() req): number {
+        this.logger.verbose("authentication in progress");
+        return 202;
+    }
 }

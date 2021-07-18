@@ -15,6 +15,9 @@ export class YtAccount extends BaseEntity{
   password: string;
 
   @Column()
+  name: string;
+
+  @Column()
   salt: string;
 
   @OneToMany(() => YtProfile, profile => profile.account, {eager: true})
