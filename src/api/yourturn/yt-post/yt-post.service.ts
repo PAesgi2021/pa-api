@@ -4,19 +4,22 @@ import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
+import { YtChallengeRepository } from '../yt-challenge/yt-challenge.repository';
 
 @Injectable()
 export class YtPostService {
 
   constructor(
     @InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository,
-    @InjectRepository(YtProfileRepository) private ytProfileRepository: YtProfileRepository
+    @InjectRepository(YtProfileRepository) private ytProfileRepository: YtProfileRepository,
+  @InjectRepository(YtChallengeRepository) private ytChallengeRepository: YtChallengeRepository
   ) {
   }
 
   async create(createYtPostDto: YtCreateYtPostDto) {
     const profile = await this.ytProfileRepository.findOneOrFail(createYtPostDto.profile_id);
-    return this.ytPostRepository.createPost(createYtPostDto, profile);
+    const challenges = await this.ytChallengeRepository.findByIds(createYtPostDto.challenges_id);
+    return this.ytPostRepository.createPost(createYtPostDto, profile, challenges);
   }
 
   findAll() {

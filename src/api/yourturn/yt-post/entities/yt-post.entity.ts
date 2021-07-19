@@ -31,7 +31,7 @@ export class YtPost extends BaseEntity {
   profile: YtProfile;
 
   @ManyToMany(() => YtChallenge, object => object.posts, {eager: false})
-  challenge: YtChallenge;
+  challenges: YtChallenge[];
 
   @OneToMany(() => YtMessage, message => message.post, {eager: true})
   comments: YtMessage[];

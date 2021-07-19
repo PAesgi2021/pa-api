@@ -2,13 +2,14 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  Entity, ManyToMany,
+  Entity, JoinTable, ManyToMany,
   ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { YtAccount } from '../../yt-account/entities/yt-account.entity';
 import { YtProfileRole } from '../../yt-profile-role/entities/yt-profile-role.entity';
 import { YtPost } from '../../yt-post/entities/yt-post.entity';
+import { YtMessage } from '../../yt-message/entities/yt-message.entity';
 
 @Entity()
 export class YtProfile extends BaseEntity {
@@ -30,7 +31,6 @@ export class YtProfile extends BaseEntity {
   @Column()
   updatedAt: Date;
 
-
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
 
@@ -39,5 +39,8 @@ export class YtProfile extends BaseEntity {
 
   @OneToMany(() => YtPost, object => object.profile)
   posts: YtPost[];
+
+  @OneToMany(() => YtMessage, object => object.profile)
+  messages: YtMessage[];
 
 }
