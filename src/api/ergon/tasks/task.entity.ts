@@ -38,7 +38,7 @@ export class ErTask extends BaseEntity {
   @ManyToOne(type => ErUser, erUser => erUser.tasks)
   user: ErUser;
 
-  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.tasks)
+  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.tasks, {onDelete: "CASCADE"})
   todolist: ErTodolist;
 
 }

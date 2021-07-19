@@ -28,8 +28,9 @@ export class ErTodolistController {
     return this.erTodolistService.update(+id, updateErTodolistDto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(@Param('id') id: string) {
+    console.log("deleting todolist");
     return this.erTodolistService.remove(+id);
   }
 }

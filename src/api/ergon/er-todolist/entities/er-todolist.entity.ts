@@ -14,7 +14,7 @@ export class ErTodolist extends BaseEntity {
     @ManyToOne(type => ErSpace, erSpace => erSpace.todolists)
     space: ErSpace;
 
-    @OneToMany(type => ErTask, erTask => erTask.todolist, {eager: true})
+    @OneToMany(type => ErTask, erTask => erTask.todolist, {eager: true, cascade: true})
     tasks: ErTask[];
 
 

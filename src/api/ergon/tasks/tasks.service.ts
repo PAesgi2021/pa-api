@@ -26,8 +26,8 @@ export class TasksService {
     return requiredTask;
   }
 
-  async deleteTask(id: number, erUser: ErUser): Promise<void> {
-    const result = await this.taskRepository.delete({ id, userId: erUser.id });
+  async deleteTask(id: number): Promise<void> {
+    const result = await this.taskRepository.delete({id: id});
 
     if (result.affected === 0) {
       throw new NotFoundException(`Task with id ${id} not found`);
@@ -35,6 +35,17 @@ export class TasksService {
   }
 
   async createTask(createTaskDto: ErTaskDto): Promise<ErTask> {
+
+    if (createTaskDto.id) {
+      const task: ErTask = await ErTask.findOne({id: createTaskDto.id});
+      task.finishedDate = createTaskDto.finishedDate ? task.finishedDate = new Date(Date.parse(createTaskDto.finishedDate)) : null;
+      if (createTaskDto.status) {
+        task.status = createTaskDto.status;
+      }
+      task.title = createTaskDto.title;
+      task.description = createTaskDto.description;
+      return task.save();
+    }
     return this.taskRepository.createTask(createTaskDto);
   }
 

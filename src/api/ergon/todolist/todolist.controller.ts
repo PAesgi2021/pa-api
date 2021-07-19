@@ -27,7 +27,7 @@ export class TodolistController {
     return this.todolistService.update(+id, updateTodolistDto);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   remove(@Param('id') id: string) {
     return this.todolistService.remove(+id);
   }

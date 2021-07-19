@@ -43,8 +43,8 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Req() req
   ): Promise<void> {
-    this.logger.verbose(`user ${req.user.name} deleting task`);
-    return this.tasksService.deleteTask(id, req.user);
+    this.logger.verbose("Deleting a Task");
+    return this.tasksService.deleteTask(id);
   }
 
   @Patch('/:id/status')

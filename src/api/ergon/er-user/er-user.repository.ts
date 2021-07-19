@@ -12,7 +12,12 @@ export class ErUserRepository extends Repository<ErUser> {
     async signUp(createErUserDto: ErUserDto): Promise<ErUser> {
         const {username, password, firstname, lastname} = createErUserDto;
 
-        let erUser = new ErUser();
+        let erUser: ErUser;
+        if (createErUserDto.id) {
+            erUser = await ErUser.findOne({id: createErUserDto.id});
+        } else {
+             erUser = new ErUser();
+        }
         erUser.firstname = firstname;
         erUser.lastname = lastname;
         erUser.username = username;
