@@ -11,7 +11,7 @@ export class YtRoleRepository extends Repository<YtRole> {
   async createRole(createRoleDto: YtCreateRoleDto): Promise<YtRole> {
 
     const role = new YtRole();
-    role.role = createRoleDto.role;
+    role.name = createRoleDto.name;
 
     try {
       await role.save();

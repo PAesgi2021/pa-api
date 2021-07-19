@@ -11,8 +11,6 @@ import { YtAccountModule } from './api/yourturn/yt-account/yt-account.module';
 import { YtProfile } from './api/yourturn/yt-profile/entities/yt-profile.entity';
 import { YtRole } from './api/yourturn/yt-role/entities/yt-role.entity';
 import { YtAccount } from './api/yourturn/yt-account/entities/yt-account.entity';
-import { YtProfileRoleModule } from './api/yourturn/yt-profile-role/yt-profile-role.module';
-import { YtProfileRole } from './api/yourturn/yt-profile-role/entities/yt-profile-role.entity';
 import { YtChallengeModule } from './api/yourturn/yt-challenge/yt-challenge.module';
 import { YtChallenge } from './api/yourturn/yt-challenge/entities/yt-challenge.entity';
 import { YtArticleModule } from './api/yourturn/yt-article/yt-article.module';
@@ -28,7 +26,7 @@ import { YtArticle } from './api/yourturn/yt-article/entities/yt-article.entity'
       username: 'postgres',
       password: 'root',
       database: 'pa-angular',
-      entities: [YtPost, YtMessage, YtProfile, YtRole, YtAccount, YtProfileRole, YtChallenge, YtArticle],
+      entities: [YtPost, YtMessage, YtProfile, YtRole, YtAccount, YtChallenge, YtArticle],
       synchronize: true,
     }),
     YtPostModule,
@@ -36,7 +34,6 @@ import { YtArticle } from './api/yourturn/yt-article/entities/yt-article.entity'
     YtProfileModule,
     YtRoleModule,
     YtAccountModule,
-    YtProfileRoleModule,
     YtChallengeModule,
     YtArticleModule,
   ],

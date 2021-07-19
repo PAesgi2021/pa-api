@@ -4,10 +4,11 @@ import { YtProfileController } from './yt-profile.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { YtProfileRepository } from './yt-profile.repository';
 import { YtAccountRepository } from '../yt-account/yt-account.repository';
+import { YtRoleRepository } from '../yt-role/yt-role.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([YtProfileRepository, YtAccountRepository])
+    TypeOrmModule.forFeature([YtProfileRepository, YtAccountRepository, YtRoleRepository])
   ],
   controllers: [YtProfileController],
   providers: [YtProfileService]
