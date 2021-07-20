@@ -16,7 +16,7 @@ export class YtChallenge extends BaseEntity {
   @Column()
   image: string;
 
-  @ManyToMany(() => YtPost, object => object.challenges, {eager: true})
+  @ManyToMany(() => YtPost, object => object.challenges)
   @JoinTable()
   posts: YtPost[];
 }
