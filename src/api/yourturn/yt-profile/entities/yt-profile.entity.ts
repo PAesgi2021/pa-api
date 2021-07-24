@@ -31,6 +31,12 @@ export class YtProfile extends BaseEntity {
   @Column()
   updatedAt: Date;
 
+  @Column()
+  ecoPoint: number;
+
+  @Column({default: true})
+  status: boolean;
+
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
 

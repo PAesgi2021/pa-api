@@ -4,4 +4,5 @@ export class YtCreateProfileDto {
   lastName: string;
   account_id: number;
   roles: string[];
+  ecoPoint: number;
 }

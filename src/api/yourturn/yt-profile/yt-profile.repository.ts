@@ -19,6 +19,7 @@ export class YtProfileRepository extends Repository<YtProfile> {
     profile.updatedAt = new Date(Date.now());
     profile.account = account;
     profile.roles = roles;
+    profile.ecoPoint = 500;
 
     try {
       await profile.save();

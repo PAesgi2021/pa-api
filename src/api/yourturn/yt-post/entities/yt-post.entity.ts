@@ -21,6 +21,9 @@ export class YtPost extends BaseEntity {
   @Column()
   likes: number;
 
+  @Column({default: true})
+  status: boolean;
+
   @Column()
   createdAt: Date;
 

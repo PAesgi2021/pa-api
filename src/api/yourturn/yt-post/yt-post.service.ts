@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
 import { YtChallengeRepository } from '../yt-challenge/yt-challenge.repository';
+import { YtPost } from './entities/yt-post.entity';
 
 @Injectable()
 export class YtPostService {
@@ -36,5 +37,21 @@ export class YtPostService {
 
   remove(id: number) {
     return this.ytPostRepository.delete(id);
+  }
+
+  async like(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes++;
+    post.profile.ecoPoint++;
+    await post.profile.save();
+    return post.save();
+  }
+
+  async unlike(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes--;
+    post.profile.ecoPoint--;
+    await post.profile.save();
+    return post.save();
   }
 }
