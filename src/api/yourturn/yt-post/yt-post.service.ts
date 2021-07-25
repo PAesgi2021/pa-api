@@ -1,26 +1,69 @@
 import { Injectable } from '@nestjs/common';
-import { CreateYtPostDto } from './dto/create-yt-post.dto';
-import { UpdateYtPostDto } from './dto/update-yt-post.dto';
+import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
+import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { YtPostRepository } from './yt-post.repository';
+import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
+import { YtChallengeRepository } from '../yt-challenge/yt-challenge.repository';
+import { getRepository } from 'typeorm';
+import { YtPost } from './entities/yt-post.entity';
+import { YtProfile } from '../yt-profile/entities/yt-profile.entity';
+import { YtChallenge } from '../yt-challenge/entities/yt-challenge.entity';
 
 @Injectable()
 export class YtPostService {
-  create(createYtPostDto: CreateYtPostDto) {
-    return 'This action adds a new ytPost';
+  constructor(
+    @InjectRepository(YtPostRepository, 'angular')
+    private ytPostRepository: YtPostRepository,
+    @InjectRepository(YtProfileRepository, 'angular')
+    private ytProfileRepository: YtProfileRepository,
+    @InjectRepository(YtChallengeRepository, 'angular')
+    private ytChallengeRepository: YtChallengeRepository,
+  ) {}
+
+  async create(createYtPostDto: YtCreateYtPostDto) {
+    const profile = await getRepository(YtProfile, 'angular').findOneOrFail(
+      createYtPostDto.profile_id,
+    );
+    const challenges = await getRepository(YtChallenge, 'angular').findByIds(
+      createYtPostDto.challenges_id,
+    );
+    return this.ytPostRepository.createPost(
+      createYtPostDto,
+      profile,
+      challenges,
+    );
   }
 
   findAll() {
-    return `This action returns all ytPost`;
+    return this.ytPostRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ytPost`;
+  findOneById(id: number) {
+    return this.ytPostRepository.findOneOrFail(id);
   }
 
-  update(id: number, updateYtPostDto: UpdateYtPostDto) {
-    return `This action updates a #${id} ytPost`;
+  update(id: number, updateYtPostDto: YtUpdateYtPostDto) {
+    return this.ytPostRepository.update(id, updateYtPostDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} ytPost`;
+    return this.ytPostRepository.delete(id);
+  }
+
+  async like(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes++;
+    post.profile.ecoPoint++;
+    await post.profile.save();
+    return post.save();
+  }
+
+  async unlike(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes--;
+    post.profile.ecoPoint--;
+    await post.profile.save();
+    return post.save();
   }
 }

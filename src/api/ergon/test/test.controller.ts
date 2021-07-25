@@ -3,16 +3,14 @@ import { testDto } from './test.dto';
 
 @Controller('test')
 export class TestController {
-
   private logger = new Logger('TestController');
-  constructor() { }
+  constructor() {}
 
   @Get()
-  getTest(
-  ): testDto {
+  getTest(): testDto {
     this.logger.verbose(`request received. `);
     const test = new testDto();
-    test.test = "IT S ALL GOOD API WORK";
+    test.test = 'IT S ALL GOOD API WORK';
 
     return test;
   }
