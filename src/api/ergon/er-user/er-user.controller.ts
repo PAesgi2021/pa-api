@@ -4,7 +4,6 @@ import {ErUserDto} from './dto/er-user.dto';
 import {UpdateErUserDto} from './dto/update-er-user.dto';
 import {SignInUserDTO} from "./dto/SignInUser.dto";
 import {ErUser} from "./entities/er-user.entity";
-import {response} from "express";
 
 @Controller('er-user')
 export class ErUserController {

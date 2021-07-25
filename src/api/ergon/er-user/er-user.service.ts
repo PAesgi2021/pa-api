@@ -30,6 +30,7 @@ export class ErUserService {
     const user = await this.erUserRepository.validateUserPassword(signInUserDto);
 
     if (!user) {
+      console.log("FAIL")
       throw new UnauthorizedException('Invalid Credentials');
     }
 
