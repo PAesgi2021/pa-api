@@ -5,6 +5,7 @@ import {InjectRepository} from '@nestjs/typeorm';
 import {YtAccountRepository} from './yt-account.repository';
 import {JwtService} from "@nestjs/jwt";
 import {JwtPayloadYourturn} from "./interfaces/jwt-payload.interface.yourturn";
+import {YtRoleRepository} from "../yt-role/yt-role.repository";
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class YtAccountService {
     private logger = new Logger('YtAccountService');
 
     constructor(
-        @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository,
+        @InjectRepository(YtAccountRepository,'angular') private accountRepository: YtAccountRepository,
         private jwtService: JwtService
     ) {
     }

@@ -19,7 +19,7 @@ export class YtMessageRepository extends Repository<YtMessage> {
     message.likes = 0;
 
     try {
-      await message.save();
+      await this.save(message);
     } catch (error) {
       this.logger.error('Failed to save this yt-message');
       throw new InternalServerErrorException('Internal Server Error!');

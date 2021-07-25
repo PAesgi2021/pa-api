@@ -18,7 +18,7 @@ export class YtChallengeRepository extends Repository<YtChallenge> {
       : challenge.image = '';
 
     try {
-      await challenge.save();
+      await this.save(challenge);
     } catch (error) {
       this.logger.error(`Failed to save a post ${challenge}. DTO : ${JSON.stringify(dto)}`, error.stack);
       throw new InternalServerErrorException('Internal Server Error! Try Again Later');

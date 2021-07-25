@@ -16,7 +16,7 @@ import {JwtModule} from "@nestjs/jwt";
               expiresIn: 36000,
           },
       }),
-    TypeOrmModule.forFeature([YtAccountRepository]),
+    TypeOrmModule.forFeature([YtAccountRepository],'angular'),
   ],
   controllers: [YtAccountController],
   providers: [YtAccountService, JwtStrategy]

@@ -6,9 +6,10 @@ import { YtChallengeRepository } from './yt-challenge.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([YtChallengeRepository]),
+    TypeOrmModule.forFeature([YtChallengeRepository],'angular'),
   ],
   controllers: [YtChallengeController],
-  providers: [YtChallengeService]
+  providers: [YtChallengeService],
+  exports: [YtChallengeService]
 })
 export class YtChallengeModule {}

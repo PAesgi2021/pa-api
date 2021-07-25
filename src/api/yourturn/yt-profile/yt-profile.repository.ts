@@ -22,7 +22,7 @@ export class YtProfileRepository extends Repository<YtProfile> {
     profile.ecoPoint = 500;
 
     try {
-      await profile.save();
+      await this.save(profile);
 
     } catch (error) {
      this.logger.error('Failed to save this yt-message');

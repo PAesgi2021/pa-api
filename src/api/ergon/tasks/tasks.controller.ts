@@ -1,27 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Delete,
-  Patch,
-  Query,
-  ParseIntPipe,
-  UseGuards,
-  Req,
-  Logger,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { TasksService } from './tasks.service';
-import { CreateTaskDto } from './dto/create-task.dto';
-import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
-import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
-import { Task } from './task.entity';
-import { TaskStatus } from './enum/task-status.enum';
+import {Body, Controller, Delete, Get, Logger, Param, ParseIntPipe, Patch, Post, Query, Req,} from '@nestjs/common';
+import {TasksService} from './tasks.service';
+import {ErTaskDto} from './dto/task.dto';
+import {GetTasksFilterDto} from './dto/get-tasks-filter.dto';
+import {TaskStatusValidationPipe} from './pipes/task-status-validation.pipe';
+import {ErTask} from './task.entity';
+import {TaskStatus} from './enum/task-status.enum';
 
-@Controller('tasks')
-@UseGuards(AuthGuard())
+@Controller('er-tasks')
 export class TasksController {
   private logger = new Logger('TasksController');
   constructor(private tasksService: TasksService) { }
@@ -30,7 +15,7 @@ export class TasksController {
   getTasks(
     @Query() filterDto: GetTasksFilterDto,
     @Req() req
-  ): Promise<Task[]> {
+  ): Promise<ErTask[]> {
     this.logger.verbose(`user ${req.user.name} retrieving all tasks. Filters: ${JSON.stringify(filterDto)}`);
     return this.tasksService.getTasks(filterDto, req.user);
   }
@@ -39,18 +24,18 @@ export class TasksController {
   getTaskById(
     @Param('id', ParseIntPipe) id: number,
     @Req() req
-  ): Promise<Task> {
+  ): Promise<ErTask> {
     this.logger.verbose(`user ${req.user.name} retrieving single task by id.`);
     return this.tasksService.getTaskById(id, req.user);
   }
 
-  @Post()
+  @Post('/save')
   createTask(
-    @Body() createTaskDto: CreateTaskDto,
+    @Body() createTaskDto: ErTaskDto,
     @Req() req,
-  ): Promise<Task> {
-    this.logger.verbose(`user ${req.user.name} creating a new task. Data: ${JSON.stringify(createTaskDto)}`);
-    return this.tasksService.createTask(createTaskDto, req.user);
+  ): Promise<ErTask> {
+    this.logger.verbose("saving new task");
+    return this.tasksService.createTask(createTaskDto);
   }
 
   @Delete('/:id')
@@ -58,8 +43,8 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Req() req
   ): Promise<void> {
-    this.logger.verbose(`user ${req.user.name} deleting task`);
-    return this.tasksService.deleteTask(id, req.user);
+    this.logger.verbose("Deleting a Task");
+    return this.tasksService.deleteTask(id);
   }
 
   @Patch('/:id/status')
@@ -67,8 +52,9 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body('status', TaskStatusValidationPipe) status: TaskStatus,
     @Req() req
-  ): Promise<Task> {
+  ): Promise<ErTask> {
     this.logger.verbose(`user ${req.user.name} updating task. Status: ${status}`);
     return this.tasksService.updateTaskStatus(id, status, req.user);
   }
 }
+

@@ -10,7 +10,7 @@ import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
 export class YtRoleService {
 
   constructor(
-    @InjectRepository(YtRoleRepository) private roleRepository: YtRoleRepository,
+    @InjectRepository(YtRoleRepository,'angular') private roleRepository: YtRoleRepository,
   ) { }
 
   async create(createRoleDto: YtCreateRoleDto) {

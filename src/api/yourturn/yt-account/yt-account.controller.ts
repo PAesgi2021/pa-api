@@ -67,7 +67,6 @@ export class YtAccountController {
     @Post('/isAuthenticated')
     @UseGuards(AuthGuard('jwt'))
     test(@Req() req): number {
-        this.logger.verbose("authentication in progress");
         return 202;
     }
 }
