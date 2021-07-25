@@ -9,6 +9,7 @@ import {getRepository} from "typeorm";
 import {YtPost} from "./entities/yt-post.entity";
 import {YtProfile} from "../yt-profile/entities/yt-profile.entity";
 import {YtChallenge} from "../yt-challenge/entities/yt-challenge.entity";
+import { YtPost } from './entities/yt-post.entity';
 
 @Injectable()
 export class YtPostService {
@@ -40,5 +41,21 @@ export class YtPostService {
 
   remove(id: number) {
     return this.ytPostRepository.delete(id);
+  }
+
+  async like(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes++;
+    post.profile.ecoPoint++;
+    await post.profile.save();
+    return post.save();
+  }
+
+  async unlike(id: number): Promise<YtPost> {
+    const post = await this.ytPostRepository.findOne(id);
+    post.likes--;
+    post.profile.ecoPoint--;
+    await post.profile.save();
+    return post.save();
   }
 }

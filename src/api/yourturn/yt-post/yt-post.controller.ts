@@ -29,6 +29,16 @@ export class YtPostController {
     return this.ytPostService.update(+id, updateYtPostDto);
   }
 
+  @Patch(':id/like')
+  like(@Param('id') id: string) {
+    return this.ytPostService.like(+id)
+  }
+
+  @Patch(':id/unlike')
+  unlike(@Param('id') id: string) {
+    return this.ytPostService.unlike(+id)
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.ytPostService.remove(+id);

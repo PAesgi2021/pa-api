@@ -1,8 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { YtCreateProfileDto } from './yt-create-profile.dto';
+import { YtRole } from '../../yt-role/entities/yt-role.entity';
 
-export class YtUpdateProfileDto extends PartialType(YtCreateProfileDto) {
-  pseudo: string;
-  firstName: string;
-  lastName: string;
+export class YtUpdateProfileDto {
+  pseudo?: string;
+  firstName?: string;
+  lastName?: string;
+  account_id?: number;
+  roles?: YtRole[];
 }

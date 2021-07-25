@@ -4,6 +4,7 @@ import { YtProfileController } from './yt-profile.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { YtProfileRepository } from './yt-profile.repository';
 import { YtAccountRepository } from '../yt-account/yt-account.repository';
+import { YtRoleRepository } from '../yt-role/yt-role.repository';
 import {YtAccountModule} from "../yt-account/yt-account.module";
 
 @Module({

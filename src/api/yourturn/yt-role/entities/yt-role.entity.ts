@@ -1,18 +1,14 @@
-import { BaseEntity, Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { YtProfileRole } from '../../yt-profile-role/entities/yt-profile-role.entity';
+import { BaseEntity, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
+import { YtProfile } from '../../yt-profile/entities/yt-profile.entity';
+
 
 @Entity()
 export class YtRole extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
 
-  @Column()
-  role: string;
+  @PrimaryColumn()
+  name: string;
 
-  @OneToMany(() => YtProfileRole, profileRole => profileRole.role)
-  profileRoles: YtProfileRole[];
-
-
-  // @ManyToMany(() => YtProfile, profile => profile.roles)
-  // profiles: YtProfile[];
+  @ManyToMany(() => YtProfile, object => object.roles)
+  @JoinTable()
+  profiles: YtProfile[];
 }

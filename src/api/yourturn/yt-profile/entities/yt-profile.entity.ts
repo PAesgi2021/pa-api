@@ -1,15 +1,15 @@
 import {
   BaseEntity,
   Column,
-  CreateDateColumn,
-  Entity, JoinTable, ManyToMany,
+  Entity, ManyToMany,
   ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { YtAccount } from '../../yt-account/entities/yt-account.entity';
-import { YtProfileRole } from '../../yt-profile-role/entities/yt-profile-role.entity';
 import { YtPost } from '../../yt-post/entities/yt-post.entity';
 import { YtMessage } from '../../yt-message/entities/yt-message.entity';
+import { YtRole } from '../../yt-role/entities/yt-role.entity';
+
 
 @Entity()
 export class YtProfile extends BaseEntity {
@@ -31,11 +31,14 @@ export class YtProfile extends BaseEntity {
   @Column()
   updatedAt: Date;
 
+  @Column()
+  ecoPoint: number;
+
+  @Column({default: true})
+  status: boolean;
+
   @ManyToOne(() => YtAccount, account => account.profiles)
   account: YtAccount;
-
-  @OneToMany(() => YtProfileRole, profileRole => profileRole.profile, {eager: true})
-  profileRoles: YtProfileRole[];
 
   @OneToMany(() => YtPost, object => object.profile)
   posts: YtPost[];
@@ -43,4 +46,6 @@ export class YtProfile extends BaseEntity {
   @OneToMany(() => YtMessage, object => object.profile)
   messages: YtMessage[];
 
+  @ManyToMany(() => YtRole, object => object.profiles, { eager: true })
+  roles: YtRole[];
 }

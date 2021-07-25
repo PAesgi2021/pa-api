@@ -1,3 +1,3 @@
 export class YtCreateRoleDto {
-  role: string;
+  name: string;
 }
