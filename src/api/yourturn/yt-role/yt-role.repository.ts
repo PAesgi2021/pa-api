@@ -16,7 +16,7 @@ export class YtRoleRepository extends Repository<YtRole> {
     try {
       await this.save(role);
     } catch (error) {
-      this.logger.error('Failed to save this yt-message');
+      this.logger.error('Failed to save this yt-role');
       throw new InternalServerErrorException('Internal Server Error!');
     }
     return role;

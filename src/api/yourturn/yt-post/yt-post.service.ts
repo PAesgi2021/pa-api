@@ -1,15 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
-import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { YtPostRepository } from './yt-post.repository';
-import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
-import { YtChallengeRepository } from '../yt-challenge/yt-challenge.repository';
-import {getRepository} from "typeorm";
-import {YtPost} from "./entities/yt-post.entity";
-import {YtProfile} from "../yt-profile/entities/yt-profile.entity";
-import {YtChallenge} from "../yt-challenge/entities/yt-challenge.entity";
-import { YtPost } from './entities/yt-post.entity';
+import { Injectable } from "@nestjs/common";
+import { YtCreateYtPostDto } from "./dto/create-yt-post.dto";
+import { YtUpdateYtPostDto } from "./dto/update-yt-post.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { YtPostRepository } from "./yt-post.repository";
+import { YtProfileRepository } from "../yt-profile/yt-profile.repository";
+import { YtChallengeRepository } from "../yt-challenge/yt-challenge.repository";
+import { getRepository } from "typeorm";
+import { YtPost } from "./entities/yt-post.entity";
+import { YtProfile } from "../yt-profile/entities/yt-profile.entity";
+import { YtChallenge } from "../yt-challenge/entities/yt-challenge.entity";
 
 @Injectable()
 export class YtPostService {
