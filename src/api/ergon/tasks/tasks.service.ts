@@ -6,11 +6,12 @@ import {TaskRepository} from './task.repository';
 import {ErTask} from './task.entity';
 import {TaskStatus} from './enum/task-status.enum';
 import {ErUser} from "../er-user/entities/er-user.entity";
+import {YtRoleRepository} from "../../yourturn/yt-role/yt-role.repository";
 
 @Injectable()
 export class TasksService {
   constructor(
-    @InjectRepository(TaskRepository)
+    @InjectRepository(TaskRepository,'java')
     private taskRepository: TaskRepository,
   ) { }
 

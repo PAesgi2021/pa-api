@@ -8,7 +8,7 @@ import { YtChallengeRepository } from './yt-challenge.repository';
 export class YtChallengeService {
 
   constructor(
-    @InjectRepository(YtChallengeRepository) private challengeRepository: YtChallengeRepository,
+    @InjectRepository(YtChallengeRepository,'angular') private challengeRepository: YtChallengeRepository,
   ) {
   }
 

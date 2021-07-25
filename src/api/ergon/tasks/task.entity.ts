@@ -1,6 +1,4 @@
 import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, IsNull} from 'typeorm';
-import { TaskStatus } from './enum/task-status.enum';
-import { User } from '../../../auth/user.entity';
 import {ErUser} from "../er-user/entities/er-user.entity";
 import {ErTodolist} from "../er-todolist/entities/er-todolist.entity";
 

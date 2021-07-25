@@ -1,10 +1,8 @@
-import {EntityRepository, Repository} from 'typeorm';
-import {InternalServerErrorException,} from '@nestjs/common';
+import {EntityRepository, getRepository, Repository} from 'typeorm';
 import {ErUser} from "./entities/er-user.entity";
 import {ErUserDto} from "./dto/er-user.dto";
 import {SignInUserDTO} from "./dto/SignInUser.dto";
 import * as bcrypt from 'bcrypt';
-import {User} from "../../../auth/user.entity";
 
 
 @EntityRepository(ErUser)
@@ -14,7 +12,7 @@ export class ErUserRepository extends Repository<ErUser> {
 
         let erUser: ErUser;
         if (createErUserDto.id) {
-            erUser = await ErUser.findOne({id: createErUserDto.id});
+            erUser = await this.findOne({id: createErUserDto.id});
         } else {
              erUser = new ErUser();
         }
@@ -24,7 +22,7 @@ export class ErUserRepository extends Repository<ErUser> {
         erUser.salt = await bcrypt.genSalt();
         erUser.password = await this.hashPassword(password, erUser.salt);
 
-        await erUser.save();
+        await getRepository(ErUser,'java').save(erUser);
 
         return erUser;
 

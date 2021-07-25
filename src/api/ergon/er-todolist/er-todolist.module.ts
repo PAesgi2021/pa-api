@@ -6,7 +6,7 @@ import {ErTodolistRepository} from "./er-space.repository";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ErTodolistRepository])
+    TypeOrmModule.forFeature([ErTodolistRepository],'java')
   ],
   controllers: [ErTodolistController],
   providers: [ErTodolistService]

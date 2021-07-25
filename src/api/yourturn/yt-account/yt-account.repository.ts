@@ -18,7 +18,7 @@ export class YtAccountRepository extends Repository<YtAccount> {
     account.name = '';
 
     try {
-      await account.save();
+      await this.save(account);
 
     } catch (error) {
       this.logger.error('Failed to register account');

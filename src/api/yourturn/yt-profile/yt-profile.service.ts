@@ -4,17 +4,21 @@ import { YtUpdateProfileDto } from './dto/yt-update-profile.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { YtProfileRepository } from './yt-profile.repository';
 import { YtAccountRepository } from '../yt-account/yt-account.repository';
+import {YtRoleRepository} from "../yt-role/yt-role.repository";
+import {getRepository} from "typeorm";
+import {YtPost} from "../yt-post/entities/yt-post.entity";
+import {YtAccount} from "../yt-account/entities/yt-account.entity";
 
 @Injectable()
 export class YtProfileService {
 
   constructor(
-    @InjectRepository(YtProfileRepository) private profileRepository: YtProfileRepository,
-    @InjectRepository(YtAccountRepository) private accountRepository: YtAccountRepository
+    @InjectRepository(YtProfileRepository,'angular') private profileRepository: YtProfileRepository,
+    @InjectRepository(YtAccountRepository,'angular') private accountRepository: YtAccountRepository
   ) { }
 
   async create(createProfileDto: YtCreateProfileDto) {
-    const account = await this.accountRepository.findOneOrFail(createProfileDto.account_id);
+    const account = await getRepository(YtAccount,'angular').findOneOrFail(createProfileDto.account_id);
     return this.profileRepository.createProfile(createProfileDto, account);
   }
 

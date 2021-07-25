@@ -7,13 +7,14 @@ import {SignInDto} from "../../../auth/dto/signin.dto";
 import {JwtPayload} from "../../../auth/interfaces/jwt-payload.interface";
 import {SignInUserDTO} from "./dto/SignInUser.dto";
 import {ErUser} from "./entities/er-user.entity";
+import {YtRoleRepository} from "../../yourturn/yt-role/yt-role.repository";
 
 @Injectable()
 export class ErUserService {
 
   private logger = new Logger('ErUserService');
   constructor(
-      @InjectRepository(ErUserRepository)
+      @InjectRepository(ErUserRepository,'java')
       private erUserRepository: ErUserRepository,
 
   ) { }

@@ -1,4 +1,4 @@
-import {EntityRepository, Repository} from 'typeorm';
+import {EntityRepository, getRepository, Repository} from 'typeorm';
 
 import {Logger} from "@nestjs/common";
 import {ErTodolist} from "./entities/er-todolist.entity";
@@ -10,14 +10,14 @@ import {ErSpace} from "../er-space/entities/er-space.entity";
 export class ErTodolistRepository extends Repository<ErTodolist> {
     private logger = new Logger('ErUserController');
     async getAll(): Promise<ErTodolist[]> {
-        return await ErTodolist.find();
+        return await getRepository(ErTodolist,'java').find();
     }
 
     async createTodolist(erTodolistDto: ErTodolistDto): Promise<ErTodolist> {
         const {title,spaceId} = erTodolistDto;
 
         const erTodolist = new ErTodolist();
-        erTodolist.space = await ErSpace.findOne(
+        erTodolist.space = await getRepository(ErSpace,'java').findOne(
             { where:
                     { id: spaceId }
             }
@@ -26,7 +26,7 @@ export class ErTodolistRepository extends Repository<ErTodolist> {
         console.log("final step")
 
         try {
-            await erTodolist.save();
+            await getRepository(ErTodolist,'java').save(erTodolist);
             this.logger.debug(`Successfully Saved Space!`);
             return erTodolist;
         } catch (err) {

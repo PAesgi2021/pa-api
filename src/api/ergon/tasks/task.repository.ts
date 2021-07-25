@@ -1,4 +1,4 @@
-import {EntityRepository, Repository} from 'typeorm';
+import {EntityRepository, getRepository, Repository} from 'typeorm';
 import {InternalServerErrorException, Logger} from '@nestjs/common';
 import {ErTask} from './task.entity';
 import {ErTaskDto} from './dto/task.dto';
@@ -48,14 +48,14 @@ export class TaskRepository extends Repository<ErTask> {
             task.finishedDate = new Date(Date.parse(createTaskDto.finishedDate));
         }
         task.limitDescription = limitDescription;
-        task.todolist = await ErTodolist.findOne(
+        task.todolist = await getRepository(ErTodolist,'java').findOne(
             {
                 where:
                     {id: todolistId}
             }
         );
         if (createTaskDto.userId) {
-            task.user = await ErUser.findOne(
+            task.user = await getRepository(ErUser,'java').findOne(
                 {
                     where:
                         {id: createTaskDto.userId}
@@ -65,7 +65,7 @@ export class TaskRepository extends Repository<ErTask> {
         };
 
         try {
-            await task.save();
+            await this.save(task);
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException('Internal Server Error! Try Again Later');

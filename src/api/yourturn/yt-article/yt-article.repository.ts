@@ -17,7 +17,7 @@ export class YtArticleRepository extends Repository<YtArticle> {
     article.number = 0;
 
     try {
-      await article.save();
+      await this.save(article);
     } catch (error) {
       this.logger.error('Failed to register account');
       throw new InternalServerErrorException('Internal Server Error!');

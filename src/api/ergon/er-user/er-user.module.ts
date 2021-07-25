@@ -6,7 +6,7 @@ import {ErUserRepository} from "./er-user.repository";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ErUserRepository])
+    TypeOrmModule.forFeature([ErUserRepository],'java')
   ],
   controllers: [ErUserController],
   providers: [

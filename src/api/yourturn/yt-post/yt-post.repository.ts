@@ -26,7 +26,7 @@ export class YtPostRepository extends Repository<YtPost> {
       post.image = "";
 
     try {
-      await post.save();
+      await this.save(post);
     } catch (error) {
       this.logger.error(`Failed to save a post ${post}. DTO : ${JSON.stringify(createPostDto)}`, error.stack);
       throw new InternalServerErrorException('Internal Server Error! Try Again Later');

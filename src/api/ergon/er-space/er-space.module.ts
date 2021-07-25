@@ -6,7 +6,7 @@ import {ErSpaceRepository} from "./er-space.repository";
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ErSpaceRepository])
+    TypeOrmModule.forFeature([ErSpaceRepository],'java')
   ],
   controllers: [ErSpaceController],
   providers: [ErSpaceService]

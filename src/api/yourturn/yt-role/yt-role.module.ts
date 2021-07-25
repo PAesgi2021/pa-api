@@ -6,7 +6,7 @@ import { YtRoleRepository } from './yt-role.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([YtRoleRepository]),
+    TypeOrmModule.forFeature([YtRoleRepository],'angular'),
   ],
   controllers: [YtRoleController],
   providers: [YtRoleService]

@@ -5,20 +5,24 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { YtPostRepository } from './yt-post.repository';
 import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
 import { YtChallengeRepository } from '../yt-challenge/yt-challenge.repository';
+import {getRepository} from "typeorm";
+import {YtPost} from "./entities/yt-post.entity";
+import {YtProfile} from "../yt-profile/entities/yt-profile.entity";
+import {YtChallenge} from "../yt-challenge/entities/yt-challenge.entity";
 
 @Injectable()
 export class YtPostService {
 
   constructor(
-    @InjectRepository(YtPostRepository) private ytPostRepository: YtPostRepository,
-    @InjectRepository(YtProfileRepository) private ytProfileRepository: YtProfileRepository,
-  @InjectRepository(YtChallengeRepository) private ytChallengeRepository: YtChallengeRepository
+      @InjectRepository(YtPostRepository,'angular') private ytPostRepository: YtPostRepository,
+    @InjectRepository(YtProfileRepository,'angular') private ytProfileRepository: YtProfileRepository,
+  @InjectRepository(YtChallengeRepository,'angular') private ytChallengeRepository: YtChallengeRepository,
   ) {
   }
 
   async create(createYtPostDto: YtCreateYtPostDto) {
-    const profile = await this.ytProfileRepository.findOneOrFail(createYtPostDto.profile_id);
-    const challenges = await this.ytChallengeRepository.findByIds(createYtPostDto.challenges_id);
+    const profile = await getRepository(YtProfile,'angular').findOneOrFail(createYtPostDto.profile_id);
+    const challenges = await getRepository(YtChallenge,'angular').findByIds(createYtPostDto.challenges_id);
     return this.ytPostRepository.createPost(createYtPostDto, profile, challenges);
   }
 

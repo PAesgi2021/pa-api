@@ -9,13 +9,15 @@ import {ErSpace} from "./entities/er-space.entity";
 import {ErUser} from "../er-user/entities/er-user.entity";
 import {ErTodolist} from "../er-todolist/entities/er-todolist.entity";
 import {ErTask} from "../tasks/task.entity";
+import {YtRoleRepository} from "../../yourturn/yt-role/yt-role.repository";
+import {getConnection, getRepository} from "typeorm";
 
 
 @Injectable()
 export class ErSpaceService {
   private logger = new Logger('ErUserService');
   constructor(
-      @InjectRepository(ErSpaceRepository)
+      @InjectRepository(ErSpaceRepository,'java')
       private erSpaceRepository: ErSpaceRepository,
 
   ) { }
@@ -45,7 +47,7 @@ export class ErSpaceService {
   }
 
   async update(id: number, updateErSpaceDto: UpdateErSpaceDto) {
-    let updatedSpace: ErSpace = await ErSpace.findOne({id});
+    let updatedSpace: ErSpace = await getRepository(ErSpace,'java').findOne({id});
     updatedSpace.visibility = updateErSpaceDto.visibility;
     updatedSpace.tag = updateErSpaceDto.tag;
     updatedSpace.name = updateErSpaceDto.name;

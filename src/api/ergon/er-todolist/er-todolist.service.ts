@@ -4,13 +4,14 @@ import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
 import {InjectRepository} from "@nestjs/typeorm";
 import {ErSpaceRepository} from "../er-space/er-space.repository";
 import {ErTodolistRepository} from "./er-space.repository";
+import {YtRoleRepository} from "../../yourturn/yt-role/yt-role.repository";
 
 @Injectable()
 export class ErTodolistService {
 
   private logger = new Logger('ErTodolistService');
   constructor(
-      @InjectRepository(ErTodolistRepository)
+      @InjectRepository(ErTodolistRepository,'java')
       private erTodolistRepository: ErTodolistRepository,
 
   ) { }

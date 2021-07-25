@@ -16,7 +16,7 @@ export class YtProfileRoleRepository extends Repository<YtProfileRole> {
     profileRole.profile = profile;
 
     try {
-      await profileRole.save();
+      await this.save(profileRole);
     } catch (error) {
       this.logger.error('Failed to save this yt-profile-role');
       throw new InternalServerErrorException('Internal Server Error!');

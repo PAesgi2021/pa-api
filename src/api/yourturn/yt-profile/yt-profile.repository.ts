@@ -19,7 +19,7 @@ export class YtProfileRepository extends Repository<YtProfile> {
     profile.account = account;
 
     try {
-      await profile.save();
+      await this.save(profile);
 
     } catch (error) {
      this.logger.error('Failed to save this yt-message');

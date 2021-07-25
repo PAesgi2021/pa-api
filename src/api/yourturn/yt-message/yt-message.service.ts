@@ -5,15 +5,19 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { YtMessageRepository } from './yt-message.repository';
 import { YtPostRepository } from '../yt-post/yt-post.repository';
 import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
+import {YtRoleRepository} from "../yt-role/yt-role.repository";
+import {getRepository} from "typeorm";
+import {YtPost} from "../yt-post/entities/yt-post.entity";
+import {YtProfile} from "../yt-profile/entities/yt-profile.entity";
 
 
 @Injectable()
 export class YtMessageService {
 
   constructor(
-    @InjectRepository(YtMessageRepository) private messageRepository: YtMessageRepository,
-    @InjectRepository(YtPostRepository) private postRepository: YtPostRepository,
-    @InjectRepository(YtProfileRepository) private profileRepository: YtProfileRepository,
+    @InjectRepository(YtMessageRepository,'angular') private messageRepository: YtMessageRepository,
+    @InjectRepository(YtPostRepository,'angular') private postRepository: YtPostRepository,
+    @InjectRepository(YtProfileRepository,'angular') private profileRepository: YtProfileRepository,
   ) { }
 
   getMessages() {
@@ -21,8 +25,8 @@ export class YtMessageService {
   }
 
   async create(createMessageDto: YtCreateMessageDto) {
-    const post = await this.postRepository.findOneOrFail(createMessageDto.post_id);
-    const profile = await this.profileRepository.findOneOrFail(createMessageDto.profile_id);
+    const post = await getRepository(YtPost,'angular').findOneOrFail(createMessageDto.post_id);
+    const profile = await getRepository(YtProfile,'angular').findOneOrFail(createMessageDto.profile_id);
     return this.messageRepository.createMessage(createMessageDto, post, profile);
   }
 
