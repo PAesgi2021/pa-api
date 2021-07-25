@@ -5,12 +5,15 @@ import { YtPost } from './entities/yt-post.entity';
 import { YtProfile } from '../yt-profile/entities/yt-profile.entity';
 import { YtChallenge } from '../yt-challenge/entities/yt-challenge.entity';
 
-
 @EntityRepository(YtPost)
 export class YtPostRepository extends Repository<YtPost> {
   private logger = new Logger('YtPostRepository');
 
-  async createPost(createPostDto: YtCreateYtPostDto, profile: YtProfile, challenges: YtChallenge[]): Promise<YtPost> {
+  async createPost(
+    createPostDto: YtCreateYtPostDto,
+    profile: YtProfile,
+    challenges: YtChallenge[],
+  ): Promise<YtPost> {
     const post = new YtPost();
     post.description = createPostDto.description;
     post.isPrivate = createPostDto.isPrivate;
@@ -20,16 +23,19 @@ export class YtPostRepository extends Repository<YtPost> {
     post.profile = profile;
     post.challenges = challenges;
 
-    if (createPostDto.image)
-      post.image = createPostDto.image;
-    else
-      post.image = "";
+    if (createPostDto.image) post.image = createPostDto.image;
+    else post.image = '';
 
     try {
       await this.save(post);
     } catch (error) {
-      this.logger.error(`Failed to save a post ${post}. DTO : ${JSON.stringify(createPostDto)}`, error.stack);
-      throw new InternalServerErrorException('Internal Server Error! Try Again Later');
+      this.logger.error(
+        `Failed to save a post ${post}. DTO : ${JSON.stringify(createPostDto)}`,
+        error.stack,
+      );
+      throw new InternalServerErrorException(
+        'Internal Server Error! Try Again Later',
+      );
     }
 
     return post;

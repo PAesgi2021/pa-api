@@ -5,10 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { YtRoleRepository } from './yt-role.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([YtRoleRepository],'angular'),
-  ],
+  imports: [TypeOrmModule.forFeature([YtRoleRepository], 'angular')],
   controllers: [YtRoleController],
-  providers: [YtRoleService]
+  providers: [YtRoleService],
 })
 export class YtRoleModule {}

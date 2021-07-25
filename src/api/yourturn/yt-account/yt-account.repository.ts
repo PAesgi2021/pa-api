@@ -9,7 +9,7 @@ export class YtAccountRepository extends Repository<YtAccount> {
   private logger = new Logger('accountRepository');
 
   async createAccount(createAccountDto: YtAccountDto): Promise<YtAccount> {
-    const {email, password} = createAccountDto;
+    const { email, password } = createAccountDto;
 
     const account = new YtAccount();
     account.email = email;
@@ -19,7 +19,6 @@ export class YtAccountRepository extends Repository<YtAccount> {
 
     try {
       await this.save(account);
-
     } catch (error) {
       this.logger.error('Failed to register account');
       throw new InternalServerErrorException('Internal Server Error!');
@@ -27,12 +26,17 @@ export class YtAccountRepository extends Repository<YtAccount> {
     return account;
   }
 
-  async validateUserPassword(signInAccountDTO: YtAccountDto): Promise<{
+  async validateUserPassword(
+    signInAccountDTO: YtAccountDto,
+  ): Promise<{
     name: string;
-    id: number, email: string, password: string }> {
-    const {email, password, name} = signInAccountDTO;
-    const account = await this.findOne({email});
-    if (account && await account.validatePassword(password)) {
+    id: number;
+    email: string;
+    password: string;
+  }> {
+    const { email, password, name } = signInAccountDTO;
+    const account = await this.findOne({ email });
+    if (account && (await account.validatePassword(password))) {
       return account;
     } else {
       return null;
@@ -42,5 +46,4 @@ export class YtAccountRepository extends Repository<YtAccount> {
   private async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
   }
-
 }

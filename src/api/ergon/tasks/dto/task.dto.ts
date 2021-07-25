@@ -1,7 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class ErTaskDto {
-
   id: number;
   @IsNotEmpty()
   title: string;
@@ -20,7 +19,4 @@ export class ErTaskDto {
   todolistId: number;
 
   userId: number;
-
-
-
 }

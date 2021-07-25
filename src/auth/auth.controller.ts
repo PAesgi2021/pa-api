@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  UseGuards,
-  Req,
-  Logger
-} from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Req, Logger } from '@nestjs/common';
 
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
@@ -15,7 +8,7 @@ import { SignInDto } from './dto/signin.dto';
 @Controller('auth')
 export class AuthController {
   private logger = new Logger('AuthController');
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('/signup')
   signUp(@Body() signUpDto: SignUpDto): Promise<void> {
@@ -31,7 +24,5 @@ export class AuthController {
 
   @Post('/test')
   @UseGuards(AuthGuard())
-  test(@Req() req) {
-    console.log(req.user);
-  }
+  test(@Req() req) {}
 }

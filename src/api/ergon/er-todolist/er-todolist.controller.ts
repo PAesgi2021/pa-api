@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ErTodolistService } from './er-todolist.service';
 import { ErTodolistDto } from './dto/er-todolist.dto';
 import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
@@ -9,7 +17,6 @@ export class ErTodolistController {
 
   @Post('/save')
   create(@Body() createErTodolistDto: ErTodolistDto) {
-    console.log("saving new todolist")
     return this.erTodolistService.create(createErTodolistDto);
   }
 
@@ -24,13 +31,15 @@ export class ErTodolistController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateErTodolistDto: UpdateErTodolistDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateErTodolistDto: UpdateErTodolistDto,
+  ) {
     return this.erTodolistService.update(+id, updateErTodolistDto);
   }
 
   @Delete('/:id')
   remove(@Param('id') id: string) {
-    console.log("deleting todolist");
     return this.erTodolistService.remove(+id);
   }
 }

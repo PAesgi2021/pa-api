@@ -1,6 +1,12 @@
-import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { YtPost } from '../../yt-post/entities/yt-post.entity';
-
 
 @Entity()
 export class YtChallenge extends BaseEntity {
@@ -16,7 +22,10 @@ export class YtChallenge extends BaseEntity {
   @Column()
   image: string;
 
-  @ManyToMany(() => YtPost, object => object.challenges)
+  @ManyToMany(
+    () => YtPost,
+    object => object.challenges,
+  )
   @JoinTable()
   posts: YtPost[];
 }

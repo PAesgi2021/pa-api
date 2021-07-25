@@ -1,16 +1,25 @@
-import {Controller, Get, Post, Body, Patch, Param, Delete, Logger, Put} from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Logger,
+  Put,
+} from '@nestjs/common';
 import { ErSpaceService } from './er-space.service';
 import { ErSpaceDTO } from './dto/er-space.dto';
 import { UpdateErSpaceDto } from './dto/update-er-space.dto';
-import {ErSpaceListDTO} from "./dto/er-spacelist.dto";
+import { ErSpaceListDTO } from './dto/er-spacelist.dto';
 
 @Controller('er-space')
 export class ErSpaceController {
   constructor(private readonly erSpaceService: ErSpaceService) {}
 
-  @Post("/save")
+  @Post('/save')
   create(@Body() erSpaceDto: ErSpaceDTO) {
-    console.log("post space")
     return this.erSpaceService.create(erSpaceDto);
   }
 
@@ -25,8 +34,7 @@ export class ErSpaceController {
   }
 
   @Put('/update')
-  update( @Body() updateErSpaceDto: UpdateErSpaceDto) {
-    console.log("UPDATE SPACE")
+  update(@Body() updateErSpaceDto: UpdateErSpaceDto) {
     return this.erSpaceService.update(updateErSpaceDto.id, updateErSpaceDto);
   }
 

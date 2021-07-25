@@ -3,13 +3,11 @@ import { InternalServerErrorException, Logger } from '@nestjs/common';
 import { YtArticle } from './entities/yt-article.entity';
 import { CreateYtArticleDto } from './dto/create-yt-article.dto';
 
-
 @EntityRepository(YtArticle)
 export class YtArticleRepository extends Repository<YtArticle> {
   private logger = new Logger('articleRepository');
 
   async createArticle(dto: CreateYtArticleDto): Promise<YtArticle> {
-
     const article = new YtArticle();
     article.name = dto.name;
     article.description = dto.description || '';
@@ -25,5 +23,4 @@ export class YtArticleRepository extends Repository<YtArticle> {
 
     return article;
   }
-
 }

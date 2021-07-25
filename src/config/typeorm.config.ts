@@ -1,5 +1,3 @@
-import {TypeOrmModuleOptions} from '@nestjs/typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-export const typeOrmConfig: TypeOrmModuleOptions = {
-
-};
+export const typeOrmConfig: TypeOrmModuleOptions = {};

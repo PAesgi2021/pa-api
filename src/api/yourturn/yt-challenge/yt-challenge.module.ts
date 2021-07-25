@@ -5,11 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { YtChallengeRepository } from './yt-challenge.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([YtChallengeRepository],'angular'),
-  ],
+  imports: [TypeOrmModule.forFeature([YtChallengeRepository], 'angular')],
   controllers: [YtChallengeController],
   providers: [YtChallengeService],
-  exports: [YtChallengeService]
+  exports: [YtChallengeService],
 })
 export class YtChallengeModule {}

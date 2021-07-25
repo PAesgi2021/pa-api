@@ -8,10 +8,10 @@ import { YtProfileRepository } from '../yt-profile/yt-profile.repository';
 
 @Injectable()
 export class YtRoleService {
-
   constructor(
-    @InjectRepository(YtRoleRepository,'angular') private roleRepository: YtRoleRepository,
-  ) { }
+    @InjectRepository(YtRoleRepository, 'angular')
+    private roleRepository: YtRoleRepository,
+  ) {}
 
   async create(createRoleDto: YtCreateRoleDto) {
     return this.roleRepository.createRole(createRoleDto);

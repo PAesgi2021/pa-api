@@ -1,20 +1,17 @@
-import {IsNotEmpty} from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
 export class ErUserDto {
+  @IsNotEmpty()
+  username: string;
 
-    @IsNotEmpty()
-    username: string;
+  @IsNotEmpty()
+  password: string;
 
-    @IsNotEmpty()
-    password: string;
+  @IsNotEmpty()
+  firstname: string;
 
-    @IsNotEmpty()
-    firstname: string;
+  @IsNotEmpty()
+  lastname: string;
 
-    @IsNotEmpty()
-    lastname: string;
-
-    id: number;
-
-
+  id: number;
 }

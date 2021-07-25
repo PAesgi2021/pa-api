@@ -1,14 +1,24 @@
-import {BadRequestException, Body, Controller, Delete, Get, Logger, Param, Patch, Post} from '@nestjs/common';
-import {ErUserService} from './er-user.service';
-import {ErUserDto} from './dto/er-user.dto';
-import {UpdateErUserDto} from './dto/update-er-user.dto';
-import {SignInUserDTO} from "./dto/SignInUser.dto";
-import {ErUser} from "./entities/er-user.entity";
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { ErUserService } from './er-user.service';
+import { ErUserDto } from './dto/er-user.dto';
+import { UpdateErUserDto } from './dto/update-er-user.dto';
+import { SignInUserDTO } from './dto/SignInUser.dto';
+import { ErUser } from './entities/er-user.entity';
 
 @Controller('er-user')
 export class ErUserController {
   private logger = new Logger('ErUserController');
-  constructor(private erUserService: ErUserService) { }
+  constructor(private erUserService: ErUserService) {}
 
   @Post('/signup')
   signUp(@Body() createErUserDto: ErUserDto): Promise<ErUser> {

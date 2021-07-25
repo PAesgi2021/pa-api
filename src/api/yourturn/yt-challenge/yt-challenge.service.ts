@@ -6,11 +6,10 @@ import { YtChallengeRepository } from './yt-challenge.repository';
 
 @Injectable()
 export class YtChallengeService {
-
   constructor(
-    @InjectRepository(YtChallengeRepository,'angular') private challengeRepository: YtChallengeRepository,
-  ) {
-  }
+    @InjectRepository(YtChallengeRepository, 'angular')
+    private challengeRepository: YtChallengeRepository,
+  ) {}
 
   create(createYtChallengeDto: CreateYtChallengeDto) {
     return this.challengeRepository.createChallenge(createYtChallengeDto);

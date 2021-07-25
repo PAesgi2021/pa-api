@@ -1,4 +1,11 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { YtPost } from '../../yt-post/entities/yt-post.entity';
 import { YtProfile } from '../../yt-profile/entities/yt-profile.entity';
 
@@ -16,12 +23,16 @@ export class YtMessage extends BaseEntity {
   @Column()
   likes: number;
 
-  @ManyToOne(() => YtProfile, object => object.messages, {eager: true})
+  @ManyToOne(
+    () => YtProfile,
+    object => object.messages,
+    { eager: true },
+  )
   profile: YtProfile;
 
-  @ManyToOne(() => YtPost, post => post.comments)
+  @ManyToOne(
+    () => YtPost,
+    post => post.comments,
+  )
   post: YtPost;
-
 }
-
-

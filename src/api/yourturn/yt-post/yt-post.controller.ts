@@ -1,13 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { YtPostService } from './yt-post.service';
 import { YtCreateYtPostDto } from './dto/create-yt-post.dto';
 import { YtUpdateYtPostDto } from './dto/update-yt-post.dto';
 
-
 @Controller('yt-post')
 export class YtPostController {
-  constructor(private readonly ytPostService: YtPostService) {
-  }
+  constructor(private readonly ytPostService: YtPostService) {}
 
   @Post()
   create(@Body() createYtPostDto: YtCreateYtPostDto) {
@@ -31,12 +37,12 @@ export class YtPostController {
 
   @Patch(':id/like')
   like(@Param('id') id: string) {
-    return this.ytPostService.like(+id)
+    return this.ytPostService.like(+id);
   }
 
   @Patch(':id/unlike')
   unlike(@Param('id') id: string) {
-    return this.ytPostService.unlike(+id)
+    return this.ytPostService.unlike(+id);
   }
 
   @Delete(':id')

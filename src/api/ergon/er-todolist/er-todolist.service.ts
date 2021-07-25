@@ -1,20 +1,18 @@
-import {Injectable, Logger, NotFoundException} from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { ErTodolistDto } from './dto/er-todolist.dto';
 import { UpdateErTodolistDto } from './dto/update-er-todolist.dto';
-import {InjectRepository} from "@nestjs/typeorm";
-import {ErSpaceRepository} from "../er-space/er-space.repository";
-import {ErTodolistRepository} from "./er-space.repository";
-import {YtRoleRepository} from "../../yourturn/yt-role/yt-role.repository";
+import { InjectRepository } from '@nestjs/typeorm';
+import { ErSpaceRepository } from '../er-space/er-space.repository';
+import { ErTodolistRepository } from './er-space.repository';
+import { YtRoleRepository } from '../../yourturn/yt-role/yt-role.repository';
 
 @Injectable()
 export class ErTodolistService {
-
   private logger = new Logger('ErTodolistService');
   constructor(
-      @InjectRepository(ErTodolistRepository,'java')
-      private erTodolistRepository: ErTodolistRepository,
-
-  ) { }
+    @InjectRepository(ErTodolistRepository, 'java')
+    private erTodolistRepository: ErTodolistRepository,
+  ) {}
   create(createErTodolistDto: ErTodolistDto) {
     return this.erTodolistRepository.createTodolist(createErTodolistDto);
   }
@@ -32,7 +30,7 @@ export class ErTodolistService {
   }
 
   async remove(id: number) {
-    const result = await this.erTodolistRepository.delete({id: id});
+    const result = await this.erTodolistRepository.delete({ id: id });
 
     if (result.affected === 0) {
       throw new NotFoundException(`Todolist with id ${id} not found`);

@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { YtArticleService } from './yt-article.service';
 import { CreateYtArticleDto } from './dto/create-yt-article.dto';
 import { UpdateYtArticleDto } from './dto/update-yt-article.dto';
@@ -23,7 +31,10 @@ export class YtArticleController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateYtArticleDto: UpdateYtArticleDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateYtArticleDto: UpdateYtArticleDto,
+  ) {
     return this.ytArticleService.update(+id, updateYtArticleDto);
   }
 

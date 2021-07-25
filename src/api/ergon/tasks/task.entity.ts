@@ -1,6 +1,13 @@
-import {Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, IsNull} from 'typeorm';
-import {ErUser} from "../er-user/entities/er-user.entity";
-import {ErTodolist} from "../er-todolist/entities/er-todolist.entity";
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  IsNull,
+} from 'typeorm';
+import { ErUser } from '../er-user/entities/er-user.entity';
+import { ErTodolist } from '../er-todolist/entities/er-todolist.entity';
 
 @Entity()
 export class ErTask extends BaseEntity {
@@ -27,16 +34,21 @@ export class ErTask extends BaseEntity {
   @Column()
   limitDescription: number;
 
-
   @Column({
     nullable: true,
   })
   userId: number;
 
-  @ManyToOne(type => ErUser, erUser => erUser.tasks)
+  @ManyToOne(
+    type => ErUser,
+    erUser => erUser.tasks,
+  )
   user: ErUser;
 
-  @ManyToOne(type => ErTodolist, erTodolist => erTodolist.tasks, {onDelete: "CASCADE"})
+  @ManyToOne(
+    type => ErTodolist,
+    erTodolist => erTodolist.tasks,
+    { onDelete: 'CASCADE' },
+  )
   todolist: ErTodolist;
-
 }

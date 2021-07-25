@@ -9,8 +9,11 @@ import { YtRole } from '../yt-role/entities/yt-role.entity';
 export class YtProfileRepository extends Repository<YtProfile> {
   private logger = new Logger('profileRepository');
 
-  async createProfile(createProfileDto: YtCreateProfileDto, account: YtAccount, roles: YtRole[]): Promise<YtProfile> {
-
+  async createProfile(
+    createProfileDto: YtCreateProfileDto,
+    account: YtAccount,
+    roles: YtRole[],
+  ): Promise<YtProfile> {
     const profile = new YtProfile();
     profile.pseudo = createProfileDto.pseudo;
     profile.firstName = createProfileDto.firstName;
@@ -23,10 +26,9 @@ export class YtProfileRepository extends Repository<YtProfile> {
 
     try {
       await this.save(profile);
-
     } catch (error) {
-     this.logger.error('Failed to save this yt-message');
-     throw new InternalServerErrorException('Internal Server Error!');
+      this.logger.error('Failed to save this yt-message');
+      throw new InternalServerErrorException('Internal Server Error!');
     }
     return profile;
   }

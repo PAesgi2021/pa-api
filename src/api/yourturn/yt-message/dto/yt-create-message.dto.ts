@@ -1,6 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
 
-
 export class YtCreateMessageDto {
   content: string;
 

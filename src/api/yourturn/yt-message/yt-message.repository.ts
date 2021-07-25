@@ -9,8 +9,11 @@ import { YtProfile } from '../yt-profile/entities/yt-profile.entity';
 export class YtMessageRepository extends Repository<YtMessage> {
   private logger = new Logger('messageRepository');
 
-  async createMessage(createMessageDto: YtCreateMessageDto, post: YtPost, profile: YtProfile): Promise<YtMessage> {
-
+  async createMessage(
+    createMessageDto: YtCreateMessageDto,
+    post: YtPost,
+    profile: YtProfile,
+  ): Promise<YtMessage> {
     const message = new YtMessage();
     message.content = createMessageDto.content;
     message.createAt = new Date(Date.now());
@@ -27,6 +30,4 @@ export class YtMessageRepository extends Repository<YtMessage> {
 
     return message;
   }
-
-
 }

@@ -1,8 +1,15 @@
-import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { YtMessage } from '../../yt-message/entities/yt-message.entity';
 import { YtProfile } from '../../yt-profile/entities/yt-profile.entity';
 import { YtChallenge } from '../../yt-challenge/entities/yt-challenge.entity';
-
 
 @Entity()
 export class YtPost extends BaseEntity {
@@ -21,7 +28,7 @@ export class YtPost extends BaseEntity {
   @Column()
   likes: number;
 
-  @Column({default: true})
+  @Column({ default: true })
   status: boolean;
 
   @Column()
@@ -30,13 +37,24 @@ export class YtPost extends BaseEntity {
   @Column()
   updatedAt: Date;
 
-  @ManyToOne(() => YtProfile, object => object.posts, {eager: true})
+  @ManyToOne(
+    () => YtProfile,
+    object => object.posts,
+    { eager: true },
+  )
   profile: YtProfile;
 
-  @ManyToMany(() => YtChallenge, object => object.posts, {eager: true})
+  @ManyToMany(
+    () => YtChallenge,
+    object => object.posts,
+    { eager: true },
+  )
   challenges: YtChallenge[];
 
-  @OneToMany(() => YtMessage, message => message.post, {eager: true})
+  @OneToMany(
+    () => YtMessage,
+    message => message.post,
+    { eager: true },
+  )
   comments: YtMessage[];
-
 }

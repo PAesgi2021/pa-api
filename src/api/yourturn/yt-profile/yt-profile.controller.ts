@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { YtProfileService } from './yt-profile.service';
 import { YtCreateProfileDto } from './dto/yt-create-profile.dto';
 import { YtUpdateProfileDto } from './dto/yt-update-profile.dto';
@@ -23,7 +31,10 @@ export class YtProfileController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProfileDto: YtUpdateProfileDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateProfileDto: YtUpdateProfileDto,
+  ) {
     return this.profileService.update(+id, updateProfileDto);
   }
 

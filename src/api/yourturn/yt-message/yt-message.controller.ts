@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Logger } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+  Logger,
+} from '@nestjs/common';
 import { YtMessageService } from './yt-message.service';
 import { YtCreateMessageDto } from './dto/yt-create-message.dto';
 import { YtUpdateMessageDto } from './dto/yt-update-message.dto';
@@ -24,7 +34,10 @@ export class YtMessageController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMessageDto: YtUpdateMessageDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateMessageDto: YtUpdateMessageDto,
+  ) {
     return this.messageService.update(+id, updateMessageDto);
   }
 

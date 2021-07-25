@@ -4,13 +4,9 @@ import { TasksService } from './tasks.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskRepository } from './task.repository';
 
-
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([TaskRepository],'java'),
-
-  ],
+  imports: [TypeOrmModule.forFeature([TaskRepository], 'java')],
   controllers: [TasksController],
   providers: [TasksService],
 })
-export class ErTaskModule { }
+export class ErTaskModule {}

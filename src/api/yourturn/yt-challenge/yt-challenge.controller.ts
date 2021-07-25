@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { YtChallengeService } from './yt-challenge.service';
 import { CreateYtChallengeDto } from './dto/create-yt-challenge.dto';
 import { UpdateYtChallengeDto } from './dto/update-yt-challenge.dto';
@@ -23,7 +31,10 @@ export class YtChallengeController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateYtChallengeDto: UpdateYtChallengeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateYtChallengeDto: UpdateYtChallengeDto,
+  ) {
     return this.ytChallengeService.update(+id, updateYtChallengeDto);
   }
 

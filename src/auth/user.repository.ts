@@ -8,7 +8,6 @@ import { User } from './user.entity';
 import { SignUpDto } from './dto/signup.dto';
 import { SignInDto } from './dto/signin.dto';
 
-
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
   async signUp(signUpDto: SignUpDto): Promise<void> {
@@ -31,10 +30,12 @@ export class UserRepository extends Repository<User> {
     }
   }
 
-  async validateUserPassword(signInDto: SignInDto): Promise<{ id: number, email: string, password: string, name: string }> {
+  async validateUserPassword(
+    signInDto: SignInDto,
+  ): Promise<{ id: number; email: string; password: string; name: string }> {
     const { email, password } = signInDto;
     const user = await this.findOne({ email });
-    if (user && await user.validatePassword(password)) {
+    if (user && (await user.validatePassword(password))) {
       return user;
     } else {
       return null;
@@ -44,6 +45,4 @@ export class UserRepository extends Repository<User> {
   private async hashPassword(password: string, salt: string): Promise<string> {
     return bcrypt.hash(password, salt);
   }
-
-
 }
